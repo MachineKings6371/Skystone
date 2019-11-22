@@ -57,20 +57,20 @@ public class reposition extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-    public void straifRight ( double power, int time)
+    public void strafeRight ( double power, int time)      //Right Motor = moves counterclockwise
     {
-        RightF.setPower(power);
-        RightB.setPower(-power);
-        LeftF.setPower(-power);
-        LeftB.setPower(power);
+        RightF.setPower(power);  //Going down
+        RightB.setPower(-power);  //Going up       These two together going inwards
+        LeftF.setPower(power);  //Going up
+        LeftB.setPower(-power); //Going down  These two together going outwards
         sleep(time);
     }
-    public void StraifLeft ( double power, int time)
+    public void strafefLeft ( double power, int time)
     {
-        RightF.setPower(-power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(-power);
+        RightF.setPower(-power); //Going up
+        RightB.setPower(power);  //Going down    These two together going outwards
+        LeftF.setPower(-power);  //Going down
+        LeftB.setPower(power); //Going up       These two together going inwards
         sleep(time);
     }
 }
