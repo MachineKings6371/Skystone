@@ -5,11 +5,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-@Disabled
+
 @TeleOp (name = "ImprovedTeleOp")
 public class betterTele extends OpMode {
-    public DcMotor LeftM;
-    public DcMotor RightM;
+    public DcMotor LeftF;
+    public DcMotor RightF;
+    public DcMotor LeftB;
+    public DcMotor RightB;
     public DcMotor Left_wheel;
     public DcMotor Right_wheel;
     public DcMotor ArmRotate;
@@ -17,8 +19,10 @@ public class betterTele extends OpMode {
     public Servo Clamp;
     @Override
     public void init() {
-        LeftM = hardwareMap.dcMotor.get("LeftM");
-        RightM = hardwareMap.dcMotor.get("RightM");
+        LeftF = hardwareMap.dcMotor.get("LeftF");
+        RightF = hardwareMap.dcMotor.get("RightF");
+        LeftB = hardwareMap.dcMotor.get("LeftB");
+        RightB = hardwareMap.dcMotor.get("RightB");
         Left_wheel = hardwareMap.dcMotor.get("Left_wheel");
         Right_wheel = hardwareMap.dcMotor.get("Right_wheel");
         ArmRotate = hardwareMap.dcMotor.get("ArmRotate");
@@ -33,14 +37,33 @@ public class betterTele extends OpMode {
         //Base motors and stuff
         //Right side base
         if (Math.abs(gamepad1.right_stick_y) > .1) {
-            RightM.setPower(gamepad1.right_stick_y - .25);
+            RightF.setPower(-gamepad1.right_stick_y - .25);
+            RightB.setPower(-gamepad1.right_stick_y - .25);
         } else{
-            RightM.setPower(0);}
+            RightF.setPower(0);
+            RightB.setPower(0);}
         //Left side base
         if (Math.abs(gamepad1.left_stick_y) > .1) {
-            LeftM.setPower(-gamepad1.left_stick_y + .25);
+            LeftF.setPower(gamepad1.left_stick_y + .25);
+            LeftB.setPower(gamepad1.left_stick_y + .25);
         }else{
-            LeftM.setPower(0);}
+            LeftF.setPower(0);
+            LeftB.setPower(0);}
+
+        //strafing
+        if (Math.abs(gamepad1.right_stick_x) > .1){
+            RightF.setPower(-gamepad1.right_stick_x);
+            RightB.setPower(gamepad1.right_stick_x);
+            LeftF.setPower(-gamepad1.right_stick_x);
+            LeftB.setPower(gamepad1.right_stick_x);
+        }else{
+            RightF.setPower(0);
+            RightB.setPower(0);
+            LeftF.setPower(0);
+            LeftB.setPower(0);
+        }
+
+
 
         //wheel intake
         if (Math.abs(gamepad1.left_trigger) > .1) {

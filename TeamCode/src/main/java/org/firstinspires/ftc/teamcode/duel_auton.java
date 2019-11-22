@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous (name = "Parking(Left)")
+@Autonomous (name = "Parking(")
 public class duel_auton extends LinearOpMode {
 
         public DcMotor LeftM;

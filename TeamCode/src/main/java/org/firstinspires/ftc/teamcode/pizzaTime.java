@@ -66,9 +66,7 @@ public class pizzaTime extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  48,  48, 5.0);
-        encoderDrive(TURN_SPEED,   12, -12, 4.0);
-        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);
+        encoderDrive(DRIVE_SPEED,  24,  24, 3.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

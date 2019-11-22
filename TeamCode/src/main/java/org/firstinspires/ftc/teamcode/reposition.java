@@ -22,10 +22,15 @@ public class reposition extends LinearOpMode {
 
         waitForStart();
 
+        goForward(.5,1000);
+        strafeLeft(.5,1000);
+        goForward(.5,1000);
+
+
 
     }
 
-    public void goForward ( double power, int time)
+    public void goBackwards ( double power, int time)
     {
         RightF.setPower(-power);
         RightB.setPower(-power);
@@ -33,7 +38,7 @@ public class reposition extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-    public void goBackwards ( double power, int time)
+    public void goForward ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(power);
@@ -57,20 +62,20 @@ public class reposition extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-    public void straifRight ( double power, int time)
+    public void strafeLeft ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(-power);
-        LeftF.setPower(-power);
-        LeftB.setPower(power);
+        LeftF.setPower(power);
+        LeftB.setPower(-power);
         sleep(time);
     }
-    public void StraifLeft ( double power, int time)
+    public void StrafeRight ( double power, int time)
     {
         RightF.setPower(-power);
         RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(-power);
+        LeftF.setPower(-power);
+        LeftB.setPower(power);
         sleep(time);
     }
 }
