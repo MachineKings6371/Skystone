@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous (name = "Reposition(Please)")
 public class reposition extends LinearOpMode {
@@ -12,6 +13,8 @@ public class reposition extends LinearOpMode {
     public DcMotor RightF;
     public DcMotor LeftB;
     public DcMotor RightB;
+    public Servo LeftPull;
+    public Servo RightPull;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -19,12 +22,15 @@ public class reposition extends LinearOpMode {
         RightF = hardwareMap.dcMotor.get("RightF");
         LeftB = hardwareMap.dcMotor.get("LeftB");
         RightB = hardwareMap.dcMotor.get("RightB");
+        LeftPull = hardwareMap.servo.get("RightPull");
+        RightPull = hardwareMap.servo.get("LeftPull");
 
         waitForStart();
 
-        goForward(.5,1000);
-        strafeLeft(.5,1000);
-        goForward(.5,1000);
+        goForward(.6,2200);
+        strafeLeft(.4,200);
+        turnLeft(.5,1000);
+
 
 
 
@@ -48,18 +54,18 @@ public class reposition extends LinearOpMode {
     }
     public void turnLeft ( double power, int time)
     {
-        RightF.setPower(-power);
-        RightB.setPower(-power);
-        LeftF.setPower(-power);
-        LeftB.setPower(-power);
-        sleep(time);
-    }
-    public void turnRight ( double power, int time)
-    {
         RightF.setPower(power);
         RightB.setPower(power);
         LeftF.setPower(power);
         LeftB.setPower(power);
+        sleep(time);
+    }
+    public void turnRight ( double power, int time)
+    {
+        RightF.setPower(-power);
+        RightB.setPower(-power);
+        LeftF.setPower(-power);
+        LeftB.setPower(-power);
         sleep(time);
     }
     public void strafeLeft ( double power, int time)

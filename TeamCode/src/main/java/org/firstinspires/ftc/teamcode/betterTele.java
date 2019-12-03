@@ -17,6 +17,8 @@ public class betterTele extends OpMode {
     public DcMotor ArmRotate;
     public DcMotor ClampLift;
     public Servo Clamp;
+    public Servo LeftPull;
+    public Servo RightPull;
     @Override
     public void init() {
         LeftF = hardwareMap.dcMotor.get("LeftF");
@@ -28,8 +30,9 @@ public class betterTele extends OpMode {
         ArmRotate = hardwareMap.dcMotor.get("ArmRotate");
         ClampLift = hardwareMap.dcMotor.get("ClampLift");
         Clamp = hardwareMap.servo.get("Clamp");
-
         Clamp.setPosition(.30);
+        LeftPull = hardwareMap.servo.get("LeftPull");
+        RightPull = hardwareMap.servo.get("RightPull");
     }
     @Override
     public void loop() {
@@ -62,8 +65,6 @@ public class betterTele extends OpMode {
             LeftF.setPower(0);
             LeftB.setPower(0);
         }
-
-
 
         //wheel intake
         if (Math.abs(gamepad1.left_trigger) > .1) {
@@ -103,6 +104,16 @@ public class betterTele extends OpMode {
             ClampLift.setPower(-.3);
         }else{
             ClampLift.setPower(0);}
+
+        //Pull Stuff
+        if (gamepad1.right_bumper){
+            RightPull.setPosition(.30);
+            LeftPull.setPosition(.30);
+        }
+        if (gamepad1.left_bumper){
+            RightPull.setPosition(.5);
+            LeftPull.setPosition(.5);
+        }
 
     }
 }

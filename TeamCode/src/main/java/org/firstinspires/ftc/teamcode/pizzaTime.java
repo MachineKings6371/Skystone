@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="encoder_auton")
@@ -43,6 +44,9 @@ public class pizzaTime extends LinearOpMode {
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
 
+        LeftF.setDirection(DcMotor.Direction.REVERSE);
+        LeftB.setDirection(DcMotor.Direction.REVERSE);
+
         LeftF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LeftB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -67,6 +71,7 @@ public class pizzaTime extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(DRIVE_SPEED,  24,  24, 3.0);
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
