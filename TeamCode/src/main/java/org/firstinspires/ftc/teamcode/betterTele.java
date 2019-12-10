@@ -32,23 +32,25 @@ public class betterTele extends OpMode {
         Clamp = hardwareMap.servo.get("Clamp");
         Clamp.setPosition(.30);
         LeftPull = hardwareMap.servo.get("LeftPull");
+
         RightPull = hardwareMap.servo.get("RightPull");
+
     }
     @Override
     public void loop() {
 
         //Base motors and stuff
-        //Right side base
-        if (Math.abs(gamepad1.right_stick_y) > .1) {
-            RightF.setPower(-gamepad1.right_stick_y - .25);
-            RightB.setPower(-gamepad1.right_stick_y - .25);
+        //Right side base                                       //
+        if (Math.abs(gamepad1.right_stick_y) > .2 ) {          //
+            RightF.setPower(-gamepad1.right_stick_y - .15);   //remember to test this before succ
+            RightB.setPower(-gamepad1.right_stick_y  - .15);
         } else{
             RightF.setPower(0);
             RightB.setPower(0);}
         //Left side base
-        if (Math.abs(gamepad1.left_stick_y) > .1) {
-            LeftF.setPower(gamepad1.left_stick_y + .25);
-            LeftB.setPower(gamepad1.left_stick_y + .25);
+        if (Math.abs(gamepad1.left_stick_y) > .2) {
+            LeftF.setPower(gamepad1.left_stick_y + .15);
+            LeftB.setPower(gamepad1.left_stick_y + .15);
         }else{
             LeftF.setPower(0);
             LeftB.setPower(0);}
@@ -87,7 +89,7 @@ public class betterTele extends OpMode {
         }
         //close clamp
         if (gamepad2.x){
-            Clamp.setPosition(.20);
+            Clamp.setPosition(.16);
         }
         //Rotates dah Arm
         if (Math.abs(gamepad2.left_trigger) > .1) {
@@ -106,13 +108,13 @@ public class betterTele extends OpMode {
             ClampLift.setPower(0);}
 
         //Pull Stuff
-        if (gamepad1.right_bumper){
-            RightPull.setPosition(.30);
-            LeftPull.setPosition(.30);
+        if (gamepad1.right_bumper){          //Ready to throw down w/ hands down
+            RightPull.setPosition(0);
+            LeftPull.setPosition(.75);
         }
-        if (gamepad1.left_bumper){
-            RightPull.setPosition(.5);
-            LeftPull.setPosition(.5);
+        if (gamepad1.left_bumper){           //Puts the hands up
+            RightPull.setPosition(.75);      //we messed up the directions, right is left and vise versa
+            LeftPull.setPosition(0);
         }
 
     }

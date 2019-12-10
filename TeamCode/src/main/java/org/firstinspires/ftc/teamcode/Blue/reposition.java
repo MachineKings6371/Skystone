@@ -1,14 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Parking(Right)")
-public class MK_code_mark1 extends LinearOpMode {
-
+@Autonomous (name = "Reposition(blue)")
+public class reposition extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -24,12 +22,35 @@ public class MK_code_mark1 extends LinearOpMode {
         RightB = hardwareMap.dcMotor.get("RightB");
         LeftPull = hardwareMap.servo.get("RightPull");
         RightPull = hardwareMap.servo.get("LeftPull");
+        LeftPull.setPosition(.75);
+        RightPull.setPosition(0);
 
         waitForStart();
+        goForward(.5,1000);
+        strafeLeft(.5,500);
+        goForward(.5,250);
+        Pause(0,500);
+        RightPull.setPosition(.75);//closing pull
+        LeftPull.setPosition(0);
+        sleep(500);
+        Pause(0,500);
+        goBackwards(.5,1800);
+        turnLeft(.5,2000);
+        Pause(0,500);
+        RightPull.setPosition(0);
+        LeftPull.setPosition(.75);
+        sleep(500);
+        Pause(0,500);
+        goBackwards(.5,1500);
 
-        goForward(.6,1000);
-        StrafeRight(.6,2000);
 
+    }
+    public void Pause ( double power, int time){
+        RightF.setPower(0);
+        RightB.setPower(0);
+        LeftF.setPower(0);
+        LeftB.setPower(0);
+        sleep(time);
     }
 
     public void goBackwards ( double power, int time)
@@ -80,5 +101,4 @@ public class MK_code_mark1 extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-
 }

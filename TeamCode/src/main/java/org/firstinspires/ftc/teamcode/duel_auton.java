@@ -3,52 +3,84 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Parking(")
+@Autonomous (name = "Parking(Left)")
 public class duel_auton extends LinearOpMode {
 
-        public DcMotor LeftM;
-        public DcMotor RightM;
+    public DcMotor LeftF;
+    public DcMotor RightF;
+    public DcMotor LeftB;
+    public DcMotor RightB;
+    public Servo LeftPull;
+    public Servo RightPull;
 
-        @Override
-        public void runOpMode() throws InterruptedException {
+    @Override
+    public void runOpMode() throws InterruptedException {
+        LeftF = hardwareMap.dcMotor.get("LeftF");
+        RightF = hardwareMap.dcMotor.get("RightF");
+        LeftB = hardwareMap.dcMotor.get("LeftB");
+        RightB = hardwareMap.dcMotor.get("RightB");
+        LeftPull = hardwareMap.servo.get("RightPull");
+        RightPull = hardwareMap.servo.get("LeftPull");
 
-            LeftM = hardwareMap.dcMotor.get("LeftM");
-            RightM = hardwareMap.dcMotor.get("RightM");
-            waitForStart();
+        waitForStart();
 
-            goForward(.5, 1200);
-            turnLeft(.5, 1050);
-            goForward(.5, 1000);
-        }
+        goForward(.6,1000);
+        StrafeLeft(.6,2000);
 
+    }
 
-        public void goForward ( double power, int time)
-        {
-            RightM.setPower(-.5);
-            LeftM.setPower(.5);
-            sleep(time);
-        }
-        public void goBackwards ( double power, int time)
-        {
-            RightM.setPower(.5);
-            LeftM.setPower(-.5);
-            sleep(time);
-        }
-        public void turnLeft ( double power, int time)
-        {
-            RightM.setPower(-.5);
-            LeftM.setPower(-.5);
-            sleep(time);
-        }
-        public void turnRight ( double power, int time)
-        {
-            RightM.setPower(.5);
-            LeftM.setPower(.5);
-            sleep(time);
-        }
-
+    public void goBackwards ( double power, int time)
+    {
+        RightF.setPower(-power);
+        RightB.setPower(-power);
+        LeftF.setPower(power);
+        LeftB.setPower(power);
+        sleep(time);
+    }
+    public void goForward ( double power, int time)
+    {
+        RightF.setPower(power);
+        RightB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(-power);
+        sleep(time);
+    }
+    public void turnLeft ( double power, int time)
+    {
+        RightF.setPower(power);
+        RightB.setPower(power);
+        LeftF.setPower(power);
+        LeftB.setPower(power);
+        sleep(time);
+    }
+    public void turnRight ( double power, int time)
+    {
+        RightF.setPower(-power);
+        RightB.setPower(-power);
+        LeftF.setPower(-power);
+        LeftB.setPower(-power);
+        sleep(time);
+    }
+    public void StrafeLeft ( double power, int time)
+    {
+        RightF.setPower(power);
+        RightB.setPower(-power);
+        LeftF.setPower(power);
+        LeftB.setPower(-power);
+        sleep(time);
+    }
+    public void StrafeRight ( double power, int time)
+    {
+        RightF.setPower(-power);
+        RightB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(power);
+        sleep(time);
+    }
 
 }
+
 
 
