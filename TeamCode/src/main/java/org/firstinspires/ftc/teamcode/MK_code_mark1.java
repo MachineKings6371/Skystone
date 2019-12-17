@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Parking(Right)")
+@Autonomous (name = "Parking(RightBridge)")
 public class MK_code_mark1 extends LinearOpMode {
 
     public DcMotor LeftF;
@@ -27,12 +27,12 @@ public class MK_code_mark1 extends LinearOpMode {
 
         waitForStart();
 
-        goForward(.6,1000);
-        StrafeRight(.6,2000);
+        goForward(.6,460);
+        strafeRight(.6,1500);
 
     }
 
-    public void goBackwards ( double power, int time)
+    public void goForward ( double power, int time)
     {
         RightF.setPower(-power);
         RightB.setPower(-power);
@@ -40,7 +40,7 @@ public class MK_code_mark1 extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-    public void goForward ( double power, int time)
+    public void goBackwards ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(power);
@@ -64,7 +64,7 @@ public class MK_code_mark1 extends LinearOpMode {
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void strafeLeft ( double power, int time)
+    public void strafeRight ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(-power);
@@ -72,7 +72,7 @@ public class MK_code_mark1 extends LinearOpMode {
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void StrafeRight ( double power, int time)
+    public void StrafeLeft ( double power, int time)
     {
         RightF.setPower(-power);
         RightB.setPower(power);

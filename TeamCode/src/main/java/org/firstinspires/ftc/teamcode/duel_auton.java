@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Parking(Left)")
+@Autonomous (name = "Parking(LeftBridge)")
 public class duel_auton extends LinearOpMode {
 
     public DcMotor LeftF;
@@ -26,12 +26,12 @@ public class duel_auton extends LinearOpMode {
 
         waitForStart();
 
-        goForward(.6,1000);
-        StrafeLeft(.6,2000);
+        goForward(.6,460);
+        StrafeLeft(.6,1500);
 
     }
 
-    public void goBackwards ( double power, int time)
+    public void goForward ( double power, int time)
     {
         RightF.setPower(-power);
         RightB.setPower(-power);
@@ -39,7 +39,7 @@ public class duel_auton extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-    public void goForward ( double power, int time)
+    public void goBackwards ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(power);
@@ -63,7 +63,7 @@ public class duel_auton extends LinearOpMode {
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void StrafeLeft ( double power, int time)
+    public void StrafeRight ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(-power);
@@ -71,7 +71,7 @@ public class duel_auton extends LinearOpMode {
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void StrafeRight ( double power, int time)
+    public void StrafeLeft ( double power, int time)
     {
         RightF.setPower(-power);
         RightB.setPower(power);
