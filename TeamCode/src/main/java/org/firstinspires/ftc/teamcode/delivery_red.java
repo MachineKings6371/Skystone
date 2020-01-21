@@ -13,6 +13,8 @@ public class reposition extends LinearOpMode {
     public DcMotor RightF;
     public DcMotor LeftB;
     public DcMotor RightB;
+    public DcMotor Right_wheel;
+    public DcMotor Left_wheel;
     public Servo LeftPull;
     public Servo RightPull;
 
@@ -22,29 +24,45 @@ public class reposition extends LinearOpMode {
         RightF = hardwareMap.dcMotor.get("RightF");
         LeftB = hardwareMap.dcMotor.get("LeftB");
         RightB = hardwareMap.dcMotor.get("RightB");
+        Right_wheel = hardwareMap.dcMotor.get("Right_wheel");
+        Left_wheel = hardwareMap.dcMotor.get("Left_wheel");
         LeftPull = hardwareMap.servo.get("RightPull");
         RightPull = hardwareMap.servo.get("LeftPull");
         LeftPull.setPosition(.75);
         RightPull.setPosition(0);
 
         waitForStart();
-        
-        goForward(.5,1000);
-        StrafeRight(.5,500);
-        goForward(.5,250);
-        Pause(0,500);
-        RightPull.setPosition(.75);//closing pull
-        LeftPull.setPosition(0);
-        sleep(500);
-        Pause(0,500);
-        goBackwards(.5,1800);
-        turnRight(.5,2000);
-        Pause(0,500);
-        RightPull.setPosition(0);
-        LeftPull.setPosition(.75);
-        sleep(500);
-        Pause(0,500);
-        goBackwards(.5,1500);
+
+        goForward(.6, 900);
+        turnLeft(.6, 1000);
+        StrafeRight(.6, 1000);
+        Succ(.5,500);
+        strafeLeft(.6, 1000);
+        turnLeft(.6, 4000);
+        goForward(.6,3000);
+        Spit(.5,500);
+        StrafeRight(.6,1000);
+
+
+    }
+    public void Succ (double power, int time) {
+        Right_wheel.setPower(power);
+        Left_wheel.setPower(-power);
+        RightF.setPower(power);
+        RightB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(-power);
+        sleep(time);
+    }
+
+    public void Spit (double power, int time) {
+        Right_wheel.setPower(power);
+        Left_wheel.setPower(-power);
+        RightF.setPower(-power);
+        RightB.setPower(-power);
+        LeftF.setPower(power);
+        LeftB.setPower(power);
+        sleep(time);
     }
 
     public void Pause ( double power, int time){
