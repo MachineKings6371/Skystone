@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+
 @TeleOp (name = "ImprovedTeleOp")
 public class betterTele extends OpMode {
     public DcMotor LeftF;
@@ -41,26 +42,26 @@ public class betterTele extends OpMode {
 
         //Base motors and stuff
         //Right side base                                       //
-        if (Math.abs(gamepad1.right_stick_y) > .2 ) {          //
+        if (Math.abs(gamepad1.right_stick_y) > .1) {          //
             RightF.setPower(gamepad1.right_stick_y);   //remember to test this before succ
             RightB.setPower(gamepad1.right_stick_y);
         } else{
             RightF.setPower(0);
             RightB.setPower(0);}
         //Left side base
-        if (Math.abs(gamepad1.left_stick_y) > .2) {
-            LeftF.setPower(-gamepad1.left_stick_y);
+        if (Math.abs(gamepad1.left_stick_y) > .1) {
+            LeftF.setPower(-gamepad1.left_stick_y);//cock dance
             LeftB.setPower(-gamepad1.left_stick_y);
         }else{
             LeftF.setPower(0);
             LeftB.setPower(0);}
 
         //strafing
-        if (Math.abs(gamepad1.right_stick_x) > .1){
-            RightF.setPower(gamepad1.right_stick_x);
-            RightB.setPower(-gamepad1.right_stick_x);
-            LeftF.setPower(gamepad1.right_stick_x);
-            LeftB.setPower(-gamepad1.right_stick_x);
+        if (Math.abs(gamepad1.right_stick_x) > .2){
+            RightF.setPower(gamepad1.right_stick_x );
+            RightB.setPower(-gamepad1.right_stick_x );
+            LeftF.setPower(gamepad1.right_stick_x );
+            LeftB.setPower(-gamepad1.right_stick_x );
         }else{
             RightF.setPower(0);
             RightB.setPower(0);
@@ -69,16 +70,20 @@ public class betterTele extends OpMode {
         }
 
         //wheel intake
+
         if (Math.abs(gamepad1.left_trigger) > .1)             Right_wheel.setPower(.8);
             Left_wheel.setPower(-.8);
             Right_wheel.setPower(-1);
+
+        if (Math.abs(gamepad1.left_trigger) > .1) {
+            Right_wheel.setPower(1);
             Left_wheel.setPower(1);
         } else{
             Right_wheel.setPower(0);
             Left_wheel.setPower(0);}
 
         if (Math.abs(gamepad1.right_trigger) > .1) {
-            Right_wheel.setPower(1);
+            Right_wheel.setPower(-1);
             Left_wheel.setPower(-1);
         } else{
             Right_wheel.setPower(0);
@@ -94,28 +99,30 @@ public class betterTele extends OpMode {
         }
         //Rotates dah Arm
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            ArmRotate.setPower(.30);
+            ArmRotate.setPower(.4);
         } else if (Math.abs(gamepad2.right_trigger) > .1) {
-            ArmRotate.setPower(-.30);
+            ArmRotate.setPower(-.4);
         } else{
             ArmRotate.setPower(0);}
 
         //Clamp lift
         if ((gamepad2.left_stick_y) > .1) {
-            ClampLift.setPower(.3);
-        }else if ((gamepad2.left_stick_y) < -.1){
-            ClampLift.setPower(-.3);
+            ClampLift.setPower(.5);
+        }else {
+            ClampLift.setPower(0);
+        } if ((gamepad2.left_stick_y) < -.1){
+            ClampLift.setPower(-.5);
         }else{
             ClampLift.setPower(0);}
 
         //Pull Stuff
         if (gamepad1.right_bumper){          //Ready to throw down w/ hands down
-            RightPull.setPosition(0);
-            LeftPull.setPosition(.75);
+            RightPull.setPosition(.30);
+            LeftPull.setPosition(.70);
         }
         if (gamepad1.left_bumper){           //Puts the hands up
-            RightPull.setPosition(.75);      //we messed up the directions, right is left and vise versa
-            LeftPull.setPosition(0);
+            RightPull.setPosition(1);      //we messed up the directions, right is left and vise versa
+            LeftPull.setPosition(-.10);
         }
         //half speed
         if (gamepad1.dpad_left) {
@@ -133,15 +140,15 @@ public class betterTele extends OpMode {
 
         //half speed strafe
         if (gamepad1.dpad_left){
-            RightF.setPower(-.5);
-            RightB.setPower(.5);
-            LeftF.setPower(-.5);
-            LeftB.setPower(.5);
+            RightF.setPower(-.7);//left right?
+            RightB.setPower(.7);
+            LeftF.setPower(-.7);
+            LeftB.setPower(.7);
         }else if(gamepad1.dpad_right){
-            RightF.setPower(.5);
-            RightB.setPower(-.5);
-            LeftF.setPower(.5);
-            LeftB.setPower(-.5);
+            RightF.setPower(.7);
+            RightB.setPower(-.7);//right right?
+            LeftF.setPower(.7);
+            LeftB.setPower(-.7);
         }else{
             RightF.setPower(0);
             RightB.setPower(0);

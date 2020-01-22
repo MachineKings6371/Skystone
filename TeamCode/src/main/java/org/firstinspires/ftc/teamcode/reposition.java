@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-
+@Disabled
 @Autonomous (name = "Reposition(Red)")
 public class reposition extends LinearOpMode {
 
@@ -47,7 +47,7 @@ public class reposition extends LinearOpMode {
         goBackwards(.5, 1500);
     }
 
-    public void Pause(double power, int time) {
+    public void Pause ( double power, int time){
         RightF.setPower(0);
         RightB.setPower(0);
         LeftF.setPower(0);
@@ -55,39 +55,48 @@ public class reposition extends LinearOpMode {
         sleep(time);
     }
 
-    public void goBackwards(double power, int time) {
-        RightF.setPower(-power);
-        RightB.setPower(-power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-
-    public void goForward(double power, int time) {
+    public void goBackwards ( double power, int time)
+    {
         RightF.setPower(power);
         RightB.setPower(power);
         LeftF.setPower(-power);
         LeftB.setPower(-power);
         sleep(time);
     }
-
-    public void turnLeft(double power, int time) {
-        RightF.setPower(power);
-        RightB.setPower(power);
+    public void goForward ( double power, int time)
+    {
+        RightF.setPower(-power);
+        RightB.setPower(-power);
         LeftF.setPower(power);
         LeftB.setPower(power);
         sleep(time);
     }
-
-    public void turnRight(double power, int time) {
+    public void turnLeft ( double power, int time)
+    {
         RightF.setPower(-power);
         RightB.setPower(-power);
         LeftF.setPower(-power);
         LeftB.setPower(-power);
         sleep(time);
     }
-
-    public void strafeLeft(double power, int time) {
+    public void turnRight ( double power, int time)
+    {
+        RightF.setPower(power);
+        RightB.setPower(power);
+        LeftF.setPower(power);
+        LeftB.setPower(power);
+        sleep(time);
+    }
+    public void strafeLeft ( double power, int time)
+    {
+        RightF.setPower(-power);
+        RightB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(power);
+        sleep(time);
+    }
+    public void StrafeRight ( double power, int time)
+    {
         RightF.setPower(power);
         RightB.setPower(-power);
         LeftF.setPower(power);
@@ -101,6 +110,5 @@ public class reposition extends LinearOpMode {
         LeftF.setPower(-power);
         LeftB.setPower(power);
     }
-
 
 }
