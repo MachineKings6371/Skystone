@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Parking(LeftBridge)")
-public class duel_auton extends LinearOpMode {
+@Autonomous (name = "Parking(RightWall)")
+public class parkingrightwall extends LinearOpMode {
 
     public DcMotor LeftF;
     public DcMotor RightF;
@@ -26,8 +27,7 @@ public class duel_auton extends LinearOpMode {
 
         waitForStart();
 
-        goForward(.6,460);
-        StrafeLeft(.6,1500);
+        strafeRight(.6,1500);
 
     }
 
@@ -63,7 +63,7 @@ public class duel_auton extends LinearOpMode {
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void StrafeRight ( double power, int time)
+    public void strafeRight ( double power, int time)
     {
         RightF.setPower(power);
         RightB.setPower(-power);
@@ -81,6 +81,3 @@ public class duel_auton extends LinearOpMode {
     }
 
 }
-
-
-

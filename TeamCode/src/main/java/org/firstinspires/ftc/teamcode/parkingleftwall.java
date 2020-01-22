@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous (name = "Parking(LeftBridge)")
-public class duel_auton extends LinearOpMode {
+@Autonomous (name = "Parking(LeftWall)")
+public class parkingleftwall extends LinearOpMode {
 
     public DcMotor LeftF;
     public DcMotor RightF;
@@ -26,7 +26,6 @@ public class duel_auton extends LinearOpMode {
 
         waitForStart();
 
-        goForward(.6,460);
         StrafeLeft(.6,1500);
 
     }

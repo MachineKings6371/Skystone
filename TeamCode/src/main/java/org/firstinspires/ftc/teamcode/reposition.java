@@ -28,26 +28,26 @@ public class reposition extends LinearOpMode {
         RightPull.setPosition(0);
 
         waitForStart();
-        
-        goForward(.5,1000);
-        StrafeRight(.5,500);
-        goForward(.5,250);
-        Pause(0,500);
+
+        goForward(.5, 1000);
+        StrafeRight(.5, 500);
+        goForward(.5, 250);
+        Pause(0, 500);
         RightPull.setPosition(.75);//closing pull
         LeftPull.setPosition(0);
         sleep(500);
-        Pause(0,500);
-        goBackwards(.5,1800);
-        turnRight(.5,2000);
-        Pause(0,500);
+        Pause(0, 500);
+        goBackwards(.5, 1800);
+        turnRight(.5, 2000);
+        Pause(0, 500);
         RightPull.setPosition(0);
         LeftPull.setPosition(.75);
         sleep(500);
-        Pause(0,500);
-        goBackwards(.5,1500);
+        Pause(0, 500);
+        goBackwards(.5, 1500);
     }
 
-    public void Pause ( double power, int time){
+    public void Pause(double power, int time) {
         RightF.setPower(0);
         RightB.setPower(0);
         LeftF.setPower(0);
@@ -55,24 +55,23 @@ public class reposition extends LinearOpMode {
         sleep(time);
     }
 
-    public void goBackwards ( double power, int time)
-    {
+    public void goBackwards(double power, int time) {
         RightF.setPower(-power);
         RightB.setPower(-power);
         LeftF.setPower(power);
         LeftB.setPower(power);
         sleep(time);
     }
-    public void goForward ( double power, int time)
-    {
+
+    public void goForward(double power, int time) {
         RightF.setPower(power);
         RightB.setPower(power);
         LeftF.setPower(-power);
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void turnLeft ( double power, int time)
-    {
+
+    public void turnLeft(double power, int time) {
         RightF.setPower(power);
         RightB.setPower(power);
         LeftF.setPower(power);
@@ -80,23 +79,23 @@ public class reposition extends LinearOpMode {
         sleep(time);
     }
 
-    public void turnRight ( double power, int time)
-    {
+    public void turnRight(double power, int time) {
         RightF.setPower(-power);
         RightB.setPower(-power);
         LeftF.setPower(-power);
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void strafeLeft ( double power, int time)
-    {
+
+    public void strafeLeft(double power, int time) {
         RightF.setPower(power);
         RightB.setPower(-power);
         LeftF.setPower(power);
         LeftB.setPower(-power);
         sleep(time);
     }
-    public void StrafeRight ( double power, int time) {
+
+    public void StrafeRight(double power, int time) {
         RightF.setPower(-power);
         RightB.setPower(power);
         LeftF.setPower(-power);
