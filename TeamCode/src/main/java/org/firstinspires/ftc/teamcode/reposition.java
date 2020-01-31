@@ -103,4 +103,12 @@ public class reposition extends LinearOpMode {
         LeftB.setPower(-power);
         sleep(time);
     }
+
+    public void StrafeRight(double power, int time) {
+        RightF.setPower(-power);
+        RightB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(power);
+    }
+
 }

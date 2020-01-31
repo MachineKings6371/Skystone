@@ -75,6 +75,11 @@ public class betterTele extends OpMode {
         }
 
         //wheel intake
+
+        if (Math.abs(gamepad1.left_trigger) > .1)             Right_wheel.setPower(.8);
+            Left_wheel.setPower(-.8);
+            Right_wheel.setPower(-1);
+
         if (Math.abs(gamepad1.left_trigger) > .1) {
             Right_wheel.setPower(gamepad1.left_trigger);
             Left_wheel.setPower(gamepad1.left_trigger);
@@ -123,6 +128,19 @@ public class betterTele extends OpMode {
         if (gamepad1.left_bumper){           //Puts the hands up
             RightPull.setPosition(1);      //we messed up the directions, right is left and vise versa
             LeftPull.setPosition(-.10);
+        }
+        //half speed
+        if (gamepad1.dpad_left) {
+            RightF.setPower(.5);
+            RightB.setPower(-.5);
+            LeftF.setPower(.5);
+            LeftB.setPower(-.5);
+        }
+        else if (gamepad1.dpad_right) {
+            RightF.setPower(.5);
+            RightB.setPower(-.5);
+            LeftF.setPower(.5);
+            LeftB.setPower(-.5);
         }
 
         //half speed strafe
