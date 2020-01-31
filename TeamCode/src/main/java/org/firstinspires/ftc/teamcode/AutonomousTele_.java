@@ -67,6 +67,7 @@ public class AutonomousTele_ extends LinearOpMode {
                 RightB.setPower(0);
             }
             //Left side base
+            //PP poopoo, I'm adding this to commit to master on Github for Alonzo
             if (Math.abs(gamepad1.left_stick_y) > .1) {
                 LeftF.setPower(-gamepad1.left_stick_y);
                 LeftB.setPower(-gamepad1.left_stick_y);
