@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 @Autonomous (name = "(RED)Reposition")
 public class Reposition2 extends LinearOpMode {
     public DcMotor LeftF;
@@ -54,23 +56,23 @@ public class Reposition2 extends LinearOpMode {
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-
-        encoderDrive(DRIVE_SPEED, -28.5, -28.5, 2.0);
-        StrafeRight(.4,500);
+        encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
+        StrafeRight(.4,600);
         Pause(250);
         RightPull.setPosition(.30);
         LeftPull.setPosition(.70);
         sleep(800);
         Pause(250);
-        encoderDrive(DRIVE_SPEED,35,35,2.0);
-        turnRight(TURN_SPEED,2000);
+        encoderDrive(DRIVE_SPEED,38,38,3.0);
+        encoderTurnRight(TURN_SPEED, 60,60,5.0);
         Pause(250);
         RightPull.setPosition(1);
         LeftPull.setPosition(0);
         sleep(800);
         Pause(250);
-        StrafeRight(.4,800);
-        goBackward(.4,1000);
+        StrafeRight(.4,900);
+        Pause(250);
+        goBackward(.4,1100);
 
 
         telemetry.addData("Path", "Complete");
@@ -145,10 +147,10 @@ public class Reposition2 extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget = LeftF.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newLeftTarget = LeftB.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newRightTarget = RightF.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
-            newRightTarget = RightB.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
+            newLeftTarget = LeftF.getCurrentPosition() + (int) (-leftInches * COUNTS_PER_INCH);
+            newLeftTarget = LeftB.getCurrentPosition() + (int) (-leftInches * COUNTS_PER_INCH);
+            newRightTarget = RightF.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
+            newRightTarget = RightB.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
 
             LeftF.setTargetPosition(newLeftTarget);
             LeftB.setTargetPosition(newLeftTarget);
@@ -307,9 +309,9 @@ public class Reposition2 extends LinearOpMode {
 
         }
     }
-    public void encoderStrafeLeftt(double speed,
-                                   double leftInches, double rightInches,
-                                   double timeoutS) {
+    public void encoderStrafeLeft(double speed,
+                                  double leftInches, double rightInches,
+                                  double timeoutS) {
         int newLeftTarget;
         int newRightTarget;
 
@@ -397,14 +399,6 @@ public class Reposition2 extends LinearOpMode {
         LeftB.setPower(power);
         sleep(time);
     }
-    public void turnRight ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(power);
-        LeftF.setPower(-power);
-        LeftB.setPower(-power);
-        sleep(time);
-    }
     public void goBackward ( double power, int time)
     {
         RightF.setPower(power);
@@ -416,4 +410,3 @@ public class Reposition2 extends LinearOpMode {
     }
 
 }
-

@@ -101,8 +101,9 @@ public class Repostition extends LinearOpMode {
         LeftPull.setPosition(0);
         sleep(800);
         Pause(250);
-        StrafeLeft(.4,700);
-        encoderDrive(DRIVE_SPEED,54,54,3.0);
+        StrafeLeft(.4,900);
+        Pause(250);
+        goBackward(.4,1100);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

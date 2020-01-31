@@ -25,7 +25,6 @@ public class parkingleftwall extends LinearOpMode {
         RightPull = hardwareMap.servo.get("LeftPull");
 
         waitForStart();
-
         StrafeLeft(.6,1500);
 
     }

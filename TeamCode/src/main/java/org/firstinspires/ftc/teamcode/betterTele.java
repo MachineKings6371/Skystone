@@ -1,13 +1,16 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.internal.tfod.Timer;
 
-@TeleOp (name = "ImprovedTeleOp")
+
+@TeleOp (name = "betterTele")
 public class betterTele extends OpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
@@ -29,7 +32,9 @@ public class betterTele extends OpMode {
         Left_wheel = hardwareMap.dcMotor.get("Left_wheel");
         Right_wheel = hardwareMap.dcMotor.get("Right_wheel");
         ArmRotate = hardwareMap.dcMotor.get("ArmRotate");
+        ArmRotate.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         ClampLift = hardwareMap.dcMotor.get("ClampLift");
+        //ClampLift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Clamp = hardwareMap.servo.get("Clamp");
         Clamp.setPosition(.30);
         LeftPull = hardwareMap.servo.get("LeftPull");
@@ -71,42 +76,42 @@ public class betterTele extends OpMode {
 
         //wheel intake
         if (Math.abs(gamepad1.left_trigger) > .1) {
-            Right_wheel.setPower(1);
-            Left_wheel.setPower(1);
+            Right_wheel.setPower(gamepad1.left_trigger);
+            Left_wheel.setPower(gamepad1.left_trigger);
         } else{
             Right_wheel.setPower(0);
             Left_wheel.setPower(0);}
 
         if (Math.abs(gamepad1.right_trigger) > .1) {
-            Right_wheel.setPower(-1);
-            Left_wheel.setPower(-1);
+            Right_wheel.setPower(-gamepad1.right_trigger);
+            Left_wheel.setPower(-gamepad1.right_trigger);
         } else{
             Right_wheel.setPower(0);
             Left_wheel.setPower(0);}
 
         //open clamp
         if (gamepad2.y){
-            Clamp.setPosition(.35);//951 923 5464s
+            Clamp.setPosition(.33);//951 923 5464s
         }
         //close clamp
         if (gamepad2.x){
-            Clamp.setPosition(.15);
+            Clamp.setPosition(.17);
         }
         //Rotates dah Arm
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            ArmRotate.setPower(.4);
+            ArmRotate.setPower(gamepad2.left_trigger/2.5);
         } else if (Math.abs(gamepad2.right_trigger) > .1) {
-            ArmRotate.setPower(-.4);
+            ArmRotate.setPower(-gamepad2.right_trigger/2.5);
         } else{
             ArmRotate.setPower(0);}
 
         //Clamp lift
         if ((gamepad2.left_stick_y) > .1) {
-            ClampLift.setPower(.5);
+            ClampLift.setPower(.9);
         }else {
             ClampLift.setPower(0);
-        } if ((gamepad2.left_stick_y) < -.1){
-            ClampLift.setPower(-.5);
+        } if ((gamepad2.left_stick_y) < -.1) {
+            ClampLift.setPower(-.9);
         }else{
             ClampLift.setPower(0);}
 
