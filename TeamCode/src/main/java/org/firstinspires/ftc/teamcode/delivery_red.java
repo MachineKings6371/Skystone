@@ -20,11 +20,8 @@ public class delivery_red extends LinearOpMode {
     public DcMotor Left_wheel;
     public Servo LeftPull;
     public Servo RightPull;
-
     public Servo LeftPull;
     public Servo RightPull;
-    public DcMotor Left_wheel;
-    public DcMotor Right_wheel;
 
     @Override
     public void runOpMode() throws InterruptedException {
