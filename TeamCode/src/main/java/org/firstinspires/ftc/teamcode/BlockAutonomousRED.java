@@ -8,9 +8,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="PreloadAutonomous(BLUE)")
+@Autonomous(name="BlockAutonomous(RED)")
 
-public class PreloadAutonomous extends LinearOpMode {
+public class BlockAutonomousRED extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -23,94 +23,72 @@ public class PreloadAutonomous extends LinearOpMode {
     public Servo LeftPull;
     public Servo RightPull;
 
-        /* Declare OpMode members. */
+    /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
 
 
     static final double COUNTS_PER_MOTOR_REV = 537.6;
     static final double WHEEL_DIAMETER_INCHES = 4.0;
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) / (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double DRIVE_SPEED = 0.4;
-    static final double TURN_SPEED = 0.5;
+    static final double DRIVE_SPEED = 0.5;
+    static final double TURN_SPEED = 0.6;
 
     @Override
     public void runOpMode() {
-            LeftF = hardwareMap.dcMotor.get("LeftF");
-            RightF = hardwareMap.dcMotor.get("RightF");
-            LeftB = hardwareMap.dcMotor.get("LeftB");
-            RightB = hardwareMap.dcMotor.get("RightB");
-            Left_wheel = hardwareMap.dcMotor.get("Left_wheel");
-            Right_wheel = hardwareMap.dcMotor.get("Right_wheel");
-            ArmRotate = hardwareMap.dcMotor.get("ArmRotate");
-            ClampLift = hardwareMap.dcMotor.get("ClampLift");
-            Clamp = hardwareMap.servo.get("Clamp");
-            Clamp.setPosition(.15);
-            LeftPull = hardwareMap.servo.get("LeftPull");
+        LeftF = hardwareMap.dcMotor.get("LeftF");
+        RightF = hardwareMap.dcMotor.get("RightF");
+        LeftB = hardwareMap.dcMotor.get("LeftB");
+        RightB = hardwareMap.dcMotor.get("RightB");
+        Left_wheel = hardwareMap.dcMotor.get("Left_wheel");
+        Right_wheel = hardwareMap.dcMotor.get("Right_wheel");
+        ArmRotate = hardwareMap.dcMotor.get("ArmRotate");
+        ClampLift = hardwareMap.dcMotor.get("ClampLift");
+        Clamp = hardwareMap.servo.get("Clamp");
+        Clamp.setPosition(.30);
+        LeftPull = hardwareMap.servo.get("LeftPull");
 
-            RightPull = hardwareMap.servo.get("RightPull");
+        RightPull = hardwareMap.servo.get("RightPull");
 
 
-            LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
+        LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
         LeftPull.setPosition(0);
         RightPull.setPosition(.80);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Resetting Encoders");    //
+        telemetry.addData("Status", "Resetting Encoders");
         telemetry.update();
 
         LeftF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightF.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LeftB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RightB.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // ClampLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // ClampLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         LeftF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LeftB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-       // ClampLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        // ClampLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-
-        if(gamepad1.left_bumper)
-
+        //phase 1
         encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
-        StrafeLeft(.4,600);
+        StrafeRight(.4, 650);
         Pause(250);
         RightPull.setPosition(.30);
         LeftPull.setPosition(.70);
         sleep(800);
         Pause(250);
-        encoderDrive(DRIVE_SPEED,38,38,3.0);
-        encoderTurnLeft(TURN_SPEED, 60,60,5.0);
+        encoderDrive(DRIVE_SPEED, 30, 30, 3.0);
+        encoderTurnRight(DRIVE_SPEED, 60, 60, 5.0);
         Pause(250);
         RightPull.setPosition(1);
         LeftPull.setPosition(0);
         sleep(800);
         Pause(250);
-        goBackward(DRIVE_SPEED,500);
-        encoderTurnRight(TURN_SPEED,24,24,3.0);
-        goBackward(DRIVE_SPEED,300);
-
-        ClampLift.setPower(.4);
-        sleep(250);
-
-        encoderArmRotate(.3,12,2.0);
-
-        ClampLift.setPower(-.3);
-        sleep(200);
-
-        Clamp.setPosition(.32);
-        sleep(500);
-
-        ClampLift.setPower(.4);
-        sleep(500);
-
-        goBackward(.4,1700);
-
-
+        //phase 2
 
 
         telemetry.addData("Path", "Complete");
@@ -467,4 +445,24 @@ public class PreloadAutonomous extends LinearOpMode {
 
     }
 
+//    public void goForward ( double power, int time)
+//    {
+//        RightF.setPower(-power);
+//        RightB.setPower(-power);
+//        LeftF.setPower(-power);
+//        LeftB.setPower(-power);
+//        sleep();
+//
+//    }
+
+
+    public void Intake() {
+        encoderDrive(.3,-5,-5,1.0);
+        Right_wheel.setPower(1);
+        Left_wheel.setPower(1);
+        sleep(3000);
+        Clamp.setPosition(.17);
+        sleep(500);
+
+    }
 }

@@ -1,17 +1,45 @@
+/* Copyright (c) 2017 FIRST. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted (subject to the limitations in the disclaimer below) provided that
+ * the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this list
+ * of conditions and the following disclaimer.
+ *
+ * Redistributions in binary form must reproduce the above copyright notice, this
+ * list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * Neither the name of FIRST nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ *
+ * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
+ * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="parkingLeftBridge")
+@Autonomous(name="(BLUE)Reposition")
 
-public class LeftBridgePark extends LinearOpMode {
+public class BlueReposition extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -37,6 +65,7 @@ public class LeftBridgePark extends LinearOpMode {
         LeftPull = hardwareMap.servo.get("LeftPull");
         RightPull = hardwareMap.servo.get("RightPull");
 
+
         LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -59,17 +88,45 @@ public class LeftBridgePark extends LinearOpMode {
 
         waitForStart();
 
-        goForward(26,2.0);
-        StrafeLeft(40,3.0);
+        goForward(30,3.0);
+        StrafeLeft(12,3.0);
+        RightPull.setPosition(.30);
+        LeftPull.setPosition(.70);
+        sleep(800);
+        goBackward(25,3.0);
+        turnLeft(48,4.0);
+        RightPull.setPosition(1);
+        LeftPull.setPosition(0);
+        sleep(800);
+        goForward(8,2.0);
+        StrafeLeft(14,1.0);
+        goBackward(40,5.0);
 
+//        encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
+//        StrafeLeft(.4,600);
+//        Pause(250);
+//        RightPull.setPosition(.30);
+//        LeftPull.setPosition(.70);
+//        sleep(800);
+//        Pause(250);
+//        encoderDrive(DRIVE_SPEED,38,38,3.0);
+//        encoderTurnLeft(TURN_SPEED, 60,60,5.0);
+//        Pause(250);
+//        RightPull.setPosition(1);
+//        LeftPull.setPosition(0);
+//        sleep(800);
+//        Pause(250);
+//        StrafeLeft(.4,900);
+//        Pause(250);
+//        goBackward(.4,1100);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
     public void encoderMovement(double speed,
-                                double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
-                                double timeoutS) {
+                                   double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
+                                   double timeoutS) {
         int newFrontLeftTarget;
         int newFrontRightTarget;
         int newBackLeftTarget;
@@ -135,63 +192,29 @@ public class LeftBridgePark extends LinearOpMode {
         RightB.setPower(0);
         sleep(time);
     }
-    public void StrafeLeft ( double inches, double timeOuts)
+    public void StrafeLeft ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeOuts);
+        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeoutS);
     }
-    public void StrafeRight ( double inches, double timeOuts)
+    public void StrafeRight ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeOuts);
+        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeoutS);
     }
-    public void turnRight ( double inches,double timeOuts)
+    public void turnRight ( double inches,double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeOuts);
+        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeoutS);
     }
-    public void turnLeft ( double inches, double timeOuts)
+    public void turnLeft ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeOuts);
+        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeoutS);
     }
-    public void goBackward ( double inches, double timeOuts)
+    public void goBackward ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeOuts);
+        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeoutS);
     }
-    public void goForward(double inches, double timeOuts)
+    public void goForward(double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeOuts);
-    }
-
-    public void StrafeLeft ( double power, int time)
-    {
-        RightF.setPower(-power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(-power);
-        sleep(time);
-    }
-    public void StrafeRight ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(-power);
-        LeftF.setPower(-power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-    public void turnLeft ( double power, int time)
-    {
-        RightF.setPower(-power);
-        RightB.setPower(-power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-    public void goBackward ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
-
+        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeoutS);
     }
 
 }

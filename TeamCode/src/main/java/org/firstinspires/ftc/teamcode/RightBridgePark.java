@@ -58,262 +58,34 @@ public class RightBridgePark extends LinearOpMode {
 
         waitForStart();
 
-        encoderDrive(DRIVE_SPEED, -28, -28, 3.0);
-        StrafeRight(.4,1700);
+        goForward(26,2.0);
+        StrafeRight(15,3.0);
 
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
-    public void encoderDrive(double speed,
-                             double leftInches, double rightInches,
-                             double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
-
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = LeftF.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newLeftTarget = LeftB.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newRightTarget = RightF.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-            newRightTarget = RightB.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-
-            LeftF.setTargetPosition(newLeftTarget);
-            LeftB.setTargetPosition(newLeftTarget);
-            RightF.setTargetPosition(newRightTarget);
-            RightB.setTargetPosition(newRightTarget);
-
-            // Turn On RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LeftB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            LeftF.setPower(Math.abs(speed));
-            LeftB.setPower(Math.abs(speed));
-            RightF.setPower(Math.abs(speed));
-            RightB.setPower(Math.abs(speed));
-
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && LeftF.isBusy() && LeftB.isBusy() && RightF.isBusy() && RightB.isBusy()) {
-                // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d");
-                telemetry.addData("Path2", "Running at %7d :%7d",
-                        LeftF.getCurrentPosition(),
-                        LeftB.getCurrentPosition());
-                RightF.getCurrentPosition();
-                RightB.getCurrentPosition();
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            LeftF.setPower(0);
-            LeftB.setPower(0);
-            RightF.setPower(0);
-            RightB.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            LeftB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        }
-
-    }
-
-    public void encoderTurnRight(double speed,
-                                 double leftInches, double rightInches,
-                                 double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
-
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = LeftF.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newLeftTarget = LeftB.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newRightTarget = RightF.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
-            newRightTarget = RightB.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
-
-            LeftF.setTargetPosition(newLeftTarget);
-            LeftB.setTargetPosition(newLeftTarget);
-            RightF.setTargetPosition(newRightTarget);
-            RightB.setTargetPosition(newRightTarget);
-
-            // Turn On RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LeftB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            LeftF.setPower(speed);
-            LeftB.setPower(speed);
-            RightF.setPower(speed);
-            RightB.setPower(speed);
-
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && LeftF.isBusy() && LeftB.isBusy() && RightF.isBusy() && RightB.isBusy()) {
-                // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d");
-                telemetry.addData("Path2", "Running at %7d :%7d",
-                        LeftF.getCurrentPosition(),
-                        LeftB.getCurrentPosition());
-                RightF.getCurrentPosition();
-                RightB.getCurrentPosition();
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            LeftF.setPower(0);
-            LeftB.setPower(0);
-            RightF.setPower(0);
-            RightB.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            LeftB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        }
-    }
-    public void encoderTurnLeft(double speed,
-                                double leftInches, double rightInches,
+    public void encoderMovement(double speed,
+                                double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
                                 double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
+        int newFrontLeftTarget;
+        int newFrontRightTarget;
+        int newBackLeftTarget;
+        int newBackRightTarget;
 
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftTarget = LeftF.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newLeftTarget = LeftB.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newRightTarget = RightF.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
-            newRightTarget = RightB.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
+            newFrontLeftTarget = LeftF.getCurrentPosition() + (int) (FrontLeftInches * COUNTS_PER_INCH);
+            newBackLeftTarget = LeftB.getCurrentPosition() + (int) (BackLeftInches * COUNTS_PER_INCH);
+            newFrontRightTarget = RightF.getCurrentPosition() + (int) (FrontRightInches * COUNTS_PER_INCH);
+            newBackRightTarget = RightB.getCurrentPosition() + (int) (BackRightInches * COUNTS_PER_INCH);
 
-            LeftF.setTargetPosition(newLeftTarget);
-            LeftB.setTargetPosition(newLeftTarget);
-            RightF.setTargetPosition(newRightTarget);
-            RightB.setTargetPosition(newRightTarget);
-
-            // Turn On RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LeftB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            LeftF.setPower(speed);
-            LeftB.setPower(speed);
-            RightF.setPower(speed);
-            RightB.setPower(speed);
-
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && LeftF.isBusy() && LeftB.isBusy() && RightF.isBusy() && RightB.isBusy()) {
-                // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d");
-                telemetry.addData("Path2", "Running at %7d :%7d",
-                        LeftF.getCurrentPosition(),
-                        LeftB.getCurrentPosition());
-                RightF.getCurrentPosition();
-                RightB.getCurrentPosition();
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            LeftF.setPower(0);
-            LeftB.setPower(0);
-            RightF.setPower(0);
-            RightB.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            LeftB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        }
-    }
-    public void encoderStrafeRight(double speed,
-                                   double leftInches, double rightInches,
-                                   double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
-
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = LeftF.getCurrentPosition() + (int) (-leftInches * COUNTS_PER_INCH);
-            newLeftTarget = LeftB.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newRightTarget = RightF.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-            newRightTarget = RightB.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
-
-            LeftF.setTargetPosition(newLeftTarget);
-            LeftB.setTargetPosition(newLeftTarget);
-            RightF.setTargetPosition(newRightTarget);
-            RightB.setTargetPosition(newRightTarget);
-
-            // Turn On RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            LeftB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            RightB.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            LeftF.setPower(speed);
-            LeftB.setPower(speed);
-            RightF.setPower(speed);
-            RightB.setPower(speed);
-
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && LeftF.isBusy() && LeftB.isBusy() && RightF.isBusy() && RightB.isBusy()) {
-                // Display it for the driver.
-                telemetry.addData("Path1", "Running to %7d :%7d");
-                telemetry.addData("Path2", "Running at %7d :%7d",
-                        LeftF.getCurrentPosition(),
-                        LeftB.getCurrentPosition());
-                RightF.getCurrentPosition();
-                RightB.getCurrentPosition();
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            LeftF.setPower(0);
-            LeftB.setPower(0);
-            RightF.setPower(0);
-            RightB.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            LeftF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            LeftB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightF.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        }
-    }
-    public void encoderStrafeLeft(double speed,
-                                  double leftInches, double rightInches,
-                                  double timeoutS) {
-        int newLeftTarget;
-        int newRightTarget;
-
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newLeftTarget = LeftF.getCurrentPosition() + (int) (leftInches * COUNTS_PER_INCH);
-            newLeftTarget = LeftB.getCurrentPosition() + (int) (-leftInches * COUNTS_PER_INCH);
-            newRightTarget = RightF.getCurrentPosition() + (int) (-rightInches * COUNTS_PER_INCH);
-            newRightTarget = RightB.getCurrentPosition() + (int) (rightInches * COUNTS_PER_INCH);
-
-            LeftF.setTargetPosition(newLeftTarget);
-            LeftB.setTargetPosition(newLeftTarget);
-            RightF.setTargetPosition(newRightTarget);
-            RightB.setTargetPosition(newRightTarget);
+            LeftF.setTargetPosition(newFrontLeftTarget);
+            LeftB.setTargetPosition(newBackLeftTarget);
+            RightF.setTargetPosition(newFrontRightTarget);
+            RightB.setTargetPosition(newBackRightTarget);
 
             // Turn On RUN_TO_POSITION
             LeftF.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -361,6 +133,30 @@ public class RightBridgePark extends LinearOpMode {
         RightF.setPower(0);
         RightB.setPower(0);
         sleep(time);
+    }
+    public void StrafeLeft ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeOuts);
+    }
+    public void StrafeRight ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeOuts);
+    }
+    public void turnRight ( double inches,double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeOuts);
+    }
+    public void turnLeft ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeOuts);
+    }
+    public void goBackward ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeOuts);
+    }
+    public void goForward(double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeOuts);
     }
     public void StrafeLeft ( double power, int time)
     {
