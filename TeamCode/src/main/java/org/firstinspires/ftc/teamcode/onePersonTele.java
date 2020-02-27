@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.internal.tfod.Timer;
 
 
-@TeleOp (name = "betterTele")//current mother
-public class betterTele extends OpMode {
+@TeleOp (name = "OnePersonTele")//experimental
+public class onePersonTele extends OpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -76,7 +76,7 @@ public class betterTele extends OpMode {
             LeftB.setPower(0);
         }
 
-        //wheel intake
+        //wheel intake/outtake
         if ((gamepad1.left_trigger) > .1){
             Left_wheel.setPower(gamepad1.left_trigger);
             Right_wheel.setPower(gamepad1.left_trigger);
@@ -88,41 +88,58 @@ public class betterTele extends OpMode {
             Right_wheel.setPower(0);
         }
 
-        //open clamp
-        if (gamepad2.y){
-            Clamp.setPosition(.35);//951 923 5464s
-        }
-        //close clamp
-        if (gamepad2.x){
-            Clamp.setPosition(.12);
-        }
+//        //open clamp
+//        if (gamepad2.y){
+//            Clamp.setPosition(.35);//951 923 5464s
+//        }
+//        //close clamp
+//        if (gamepad2.x){
+//            Clamp.setPosition(.16);
+//        }
 
-        //Rotates dah Arm
-        if (Math.abs(gamepad2.left_trigger) > .1) {
-            ArmRotate.setPower(gamepad2.left_trigger/2.5);
-        } else if (Math.abs(gamepad2.right_trigger) > .1) {
-            ArmRotate.setPower(-gamepad2.right_trigger/2.5);
-        } else{
-            ArmRotate.setPower(0);}
+        //Open Clamp
+        if (gamepad1.dpad_right) {
+            Clamp.setPosition(.35);
+        }
+        //Close Clamp
+        if (gamepad1.dpad_left) {
+            Clamp.setPosition(.16);
+        }
+//
+//        //Rotates dah Arm
+//        if (Math.abs(gamepad2.left_trigger) > .1) {
+//            ArmRotate.setPower(gamepad2.left_trigger/2.5);
+//        } else if (Math.abs(gamepad2.right_trigger) > .1) {
+//            ArmRotate.setPower(-gamepad2.right_trigger/2.5);
+//        } else{
+//            ArmRotate.setPower(0);}
+
+        if (gamepad1.left_bumper) {
+            ArmRotate.setPower(.35);
+            stop();
+        }
+        else if (gamepad1.right_bumper) {
+            ArmRotate.setPower(-.35);
+            stop();
+        }
 
         //Clamp lift
-        if (Math.abs(gamepad2.left_stick_y) > .1){
-            ClampLift.setPower(-gamepad2.left_stick_y/2);
-        }else if (Math.abs(gamepad2.left_stick_y) < .1){
-            ClampLift.setPower(gamepad2.left_stick_y/2);
+        if (gamepad1.dpad_up){
+            ClampLift.setPower(-.7);
+        }else if (gamepad1.dpad_down){
+            ClampLift.setPower(.7);
         }else {
             ClampLift.setPower(0);
         }
 
         //Pull Stuff
-        if (gamepad1.right_bumper){          //Ready to throw down w/ hands down
+        if (gamepad1.x){          //Ready to throw down w/ hands down
             RightPull.setPosition(.30);
             LeftPull.setPosition(.70);
         }
-        if (gamepad1.left_bumper){           //Puts the hands up
+        if (gamepad1.y){           //Puts the hands up
             RightPull.setPosition(1);      //we messed up the directions, right is left and vise versa
             LeftPull.setPosition(.10);
         }
-
     }
 }

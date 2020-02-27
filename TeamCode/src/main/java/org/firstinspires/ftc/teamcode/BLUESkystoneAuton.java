@@ -34,6 +34,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -44,18 +45,24 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-import java.util.Locale;
+@Autonomous(name="(BLUE)BlockAuto&Repo")
 
-@Autonomous(name="(BLUE)Reposition")
-
-public class BlueReposition extends LinearOpMode {
+public class BLUESkystoneAuton extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
     public DcMotor RightB;
+    public DcMotor Left_wheel;
+    public DcMotor Right_wheel;
+    public DcMotor ArmRotate;
+    public DcMotor ClampLift;
+    public Servo Clamp;
     public Servo LeftPull;
     public Servo RightPull;
-    //public BNO055IMU IMU;
+    public ColorSensor ColorSensor1;
+    public ColorSensor ColorSensor2;
+//    public BNO055IMU IMU;
+    public String autonomous;
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
@@ -80,7 +87,7 @@ public class BlueReposition extends LinearOpMode {
 //        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 //
 //        IMU.initialize(parameters);
-//        IMU = hardwareMap.get(BNO055IMU.class, "imu");
+
 
         LeftF = hardwareMap.dcMotor.get("LeftF");
         RightF = hardwareMap.dcMotor.get("RightF");
@@ -89,6 +96,10 @@ public class BlueReposition extends LinearOpMode {
         LeftPull = hardwareMap.servo.get("LeftPull");
         RightPull = hardwareMap.servo.get("RightPull");
 
+        ColorSensor1 = hardwareMap.colorSensor.get("sensor_color1");
+       // ColorSensor2 = hardwareMap.colorSensor.get("sensor_color2");
+
+        //IMU = hardwareMap.get(BNO055IMU.class, "imu");
 
         LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -111,20 +122,36 @@ public class BlueReposition extends LinearOpMode {
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-        goForward(30,3.0);
-        StrafeLeft(12,3.0);
-        RightPull.setPosition(.20);
-        LeftPull.setPosition(.80);
-        sleep(1000);
-        goBackward(25,3.0);
 
-        Pause(250);
-        RightPull.setPosition(1);
-        LeftPull.setPosition(0);
+        RightPull.setPosition(.60);
         sleep(800);
-        goForward(8,2.0);
-        StrafeLeft(14,1.0);
-        goBackward(40,5.0);
+        goForward(29,2.0);
+        StrafeRight(23,2.0);
+        if (ColorSensor1.blue() > 100){
+            //autonomous 1
+            autonomous = "1";
+        }
+        StrafeRight(6,2.0);
+        if (ColorSensor1.blue() > 100){
+            //autonomous 2
+            autonomous = "2";
+        } else {
+            autonomous = "3";
+        }
+        StrafeRight(6, 2.0);
+
+        if (autonomous == "1") {
+
+        } else if (autonomous == "2") {
+
+        } else if (autonomous == "3") {
+
+        }
+        // autonomous 3
+
+
+
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -198,17 +225,13 @@ public class BlueReposition extends LinearOpMode {
 
         }
     }
-    public void simpLeftTurn (){
-        LeftF.setPower(.4);
-        LeftB.setPower(.4);
-        RightF.setPower(-.4);
-        RightB.setPower(-.4);
-    }
-    public void simpRightTurn (){
-        LeftF.setPower(-.4);
-        LeftB.setPower(-.4);
-        RightF.setPower(.4);
-        RightB.setPower(.4);
+
+
+
+    public  void Succ (){
+        Right_wheel.setPower(.8);
+        Left_wheel.setPower(.8);
+        goForward(7,2.0);
     }
 
     public void StrafeLeft ( double inches, double timeoutS)
@@ -235,6 +258,5 @@ public class BlueReposition extends LinearOpMode {
     {
         encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeoutS);
     }
-
 
 }
