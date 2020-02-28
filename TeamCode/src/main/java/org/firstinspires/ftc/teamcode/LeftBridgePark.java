@@ -59,7 +59,7 @@ public class LeftBridgePark extends LinearOpMode {
 
         waitForStart();
 
-        goForward(26,2.0);
+        goForward(25,2.0);
         StrafeLeft(40,3.0);
 
 
