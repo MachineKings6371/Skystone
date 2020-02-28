@@ -80,7 +80,7 @@ public class SensorMRColor extends LinearOpMode {
     boolean bLedOn = true;
 
     // get a reference to our ColorSensor object.
-    colorSensor = hardwareMap.get(ColorSensor.class, "sensor_color1");
+    colorSensor = hardwareMap.get(ColorSensor.class, "sensor_color");
 
     // Set the LED in the beginning
     colorSensor.enableLed(bLedOn);
@@ -88,6 +88,9 @@ public class SensorMRColor extends LinearOpMode {
     // wait for the start button to be pressed.
     waitForStart();
 
+
+    colorSensor.alpha();
+    colorSensor.argb();
     // while the op mode is active, loop and read the RGB data.
     // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
     while (opModeIsActive()) {
