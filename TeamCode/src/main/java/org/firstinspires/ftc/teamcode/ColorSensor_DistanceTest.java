@@ -33,6 +33,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -52,7 +53,7 @@ import java.util.Locale;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list.
  */
-@TeleOp(name = "Sensor: REVColorDistance", group = "Sensor")
+@Autonomous(name = "Sensor: REVColorDistance", group = "Sensor")
 //@Disabled                            // Comment this out to add to the opmode list
 public class ColorSensor_DistanceTest extends LinearOpMode {
 
@@ -118,6 +119,7 @@ public class ColorSensor_DistanceTest extends LinearOpMode {
         // loop and read the RGB and distance data.
         // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
         while (opModeIsActive()) {
+
             // convert the RGB values to HSV values.
             // multiply by the SCALE_FACTOR.
             // then cast it back to int (SCALE_FACTOR is a double)
