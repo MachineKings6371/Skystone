@@ -45,7 +45,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="(BLUE)BlockAuto&Repo")
+@Autonomous(name="(BLUE)Skystone")
 
 public class BLUESkystoneAuton extends LinearOpMode {
     public DcMotor LeftF;
