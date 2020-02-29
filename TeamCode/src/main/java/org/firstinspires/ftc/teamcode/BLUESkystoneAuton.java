@@ -123,9 +123,14 @@ public class BLUESkystoneAuton extends LinearOpMode {
 
         waitForStart();
 
-        while ((ColorSensor1.red() & ColorSensor1.blue()) >= 20){
-            simpLeftStrafe();
-        } stop();
+        while (opModeIsActive()){
+
+            while ((ColorSensor1.red() & ColorSensor1.blue()) >= 20){
+                simpLeftStrafe();
+            } stop();
+        }
+
+
 
 //        RightPull.setPosition(.60);
 //        sleep(800);

@@ -59,8 +59,8 @@ public class Red2Block_Auto extends LinearOpMode {
         LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        LeftPull.setPosition(0);
-        RightPull.setPosition(.90);
+//        LeftPull.setPosition(0);
+//        RightPull.setPosition(.90);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
