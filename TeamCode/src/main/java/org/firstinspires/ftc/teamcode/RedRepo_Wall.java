@@ -37,9 +37,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="(RED)Reposition")
+@Autonomous(name="(RED)Reposition(Wall)")
 
-public class RedReposition extends LinearOpMode {
+public class RedRepo_Wall extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -93,13 +93,13 @@ public class RedReposition extends LinearOpMode {
         LeftPull.setPosition(.70);
         sleep(800);
         goBackward(28,3.0);
-        turnRight(45,4.0);
+        turnRight(48,4.0);
         RightPull.setPosition(1);
         LeftPull.setPosition(0);
         sleep(800);
-        goForward(8,2.0);
-        StrafeRight(12,1.0);
-        goBackward(45,5.0);
+        goForward(14,2.0);
+        StrafeRight(13,1.0);
+        goBackward(40,5.0);
 
 //        encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
 //        StrafeLeft(.4,600);

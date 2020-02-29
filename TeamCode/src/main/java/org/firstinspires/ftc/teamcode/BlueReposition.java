@@ -112,18 +112,18 @@ public class BlueReposition extends LinearOpMode {
 
         waitForStart();
         goForward(30,3.0);
-        StrafeLeft(12,3.0);
+        StrafeLeft(14,3.0);
         RightPull.setPosition(.20);
         LeftPull.setPosition(.80);
         sleep(1000);
         goBackward(25,3.0);
-        turnLeft(40,4.0);
+        turnLeft(45,4.0);
         Pause(250);
         RightPull.setPosition(1);
         LeftPull.setPosition(0);
         sleep(800);
-        goForward(8,2.0);
-        StrafeLeft(14,1.0);
+        goForward(12,2.0);
+        StrafeLeft(12,1.0);
         goBackward(40,5.0);
 
         telemetry.addData("Path", "Complete");

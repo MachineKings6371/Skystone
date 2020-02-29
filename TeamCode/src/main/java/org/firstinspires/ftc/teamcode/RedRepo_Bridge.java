@@ -29,40 +29,23 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+@Autonomous(name="(RED)Reposition(Bridge)")
 
-@Autonomous(name="(BLUE)BlockAuto&Repo")
-
-public class BLUESkystoneAuton extends LinearOpMode {
+public class RedRepo_Bridge extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
     public DcMotor RightB;
-    public DcMotor Left_wheel;
-    public DcMotor Right_wheel;
-    public DcMotor ArmRotate;
-    public DcMotor ClampLift;
-    public Servo Clamp;
     public Servo LeftPull;
     public Servo RightPull;
-    public ColorSensor ColorSensor1;
-    public ColorSensor ColorSensor2;
-//    public BNO055IMU IMU;
-    public String autonomous;
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
@@ -73,22 +56,8 @@ public class BLUESkystoneAuton extends LinearOpMode {
     static final double DRIVE_SPEED = 0.4;
     static final double TURN_SPEED = 0.5;
 
-    Orientation angles;
-
     @Override
     public void runOpMode() {
-
-//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-//        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-//        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-//        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-//        parameters.loggingEnabled      = true;
-//        parameters.loggingTag          = "IMU";
-//        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-//
-//        IMU.initialize(parameters);
-
-
         LeftF = hardwareMap.dcMotor.get("LeftF");
         RightF = hardwareMap.dcMotor.get("RightF");
         LeftB = hardwareMap.dcMotor.get("LeftB");
@@ -96,16 +65,11 @@ public class BLUESkystoneAuton extends LinearOpMode {
         LeftPull = hardwareMap.servo.get("LeftPull");
         RightPull = hardwareMap.servo.get("RightPull");
 
-        ColorSensor1 = hardwareMap.colorSensor.get("sensor_color1");
-       // ColorSensor2 = hardwareMap.colorSensor.get("sensor_color2");
-
-        //IMU = hardwareMap.get(BNO055IMU.class, "imu");
-
         LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
         LeftPull.setPosition(0);
-        RightPull.setPosition(.90);
+        RightPull.setPosition(.80);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -123,48 +87,42 @@ public class BLUESkystoneAuton extends LinearOpMode {
 
         waitForStart();
 
-        while ((ColorSensor1.red() & ColorSensor1.blue()) >= 20){
-            simpLeftStrafe();
-        } stop();
+        goForward(30,3.0);
+        StrafeRight(12,3.0);
+        RightPull.setPosition(.30);
+        LeftPull.setPosition(.70);
+        sleep(800);
+        goBackward(28,3.0);
+        turnRight(48,4.0);
+        RightPull.setPosition(1);
+        LeftPull.setPosition(0);
+        sleep(800);
+        goForward(14,2.0);
+        StrafeLeft(20,1.0);
+        goBackward(40,5.0);
 
-//        RightPull.setPosition(.60);
+//        encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
+//        StrafeLeft(.4,600);
+//        Pause(250);
+//        RightPull.setPosition(.30);
+//        LeftPull.setPosition(.70);
 //        sleep(800);
-//        goForward(29,2.0);
-//        StrafeRight(23,2.0);
-//        if (ColorSensor1.blue() > 50){
-//            //autonomous 1
-//            autonomous = "1";
-//        }
-//        StrafeRight(6,2.0);
-//        if (ColorSensor1.blue() > 100){
-//            //autonomous 2
-//            autonomous = "2";
-//        } else {
-//            autonomous = "3";
-//        }
-//        StrafeRight(6, 2.0);
-//
-//        if (autonomous == "1") {
-//
-//        } else if (autonomous == "2") {
-//
-//        } else if (autonomous == "3") {
-//
-//        }
-//        // autonomous 3
+//        Pause(250);
+//        encoderDrive(DRIVE_SPEED,38,38,3.0);
+//        encoderTurnLeft(TURN_SPEED, 60,60,5.0);
+//        Pause(250);
+//        RightPull.setPosition(1);
+//        LeftPull.setPosition(0);
+//        sleep(800);
+//        Pause(250);
+//        StrafeLeft(.4,900);
+//        Pause(250);
+//        goBackward(.4,1100);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
-
-    public void Pause (int time) {
-        LeftF.setPower(0);
-        LeftB.setPower(0);
-        RightF.setPower(0);
-        RightB.setPower(0);
-        sleep(time);
-    }
 
     public void encoderMovement(double speed,
                                 double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
@@ -227,48 +185,36 @@ public class BLUESkystoneAuton extends LinearOpMode {
     }
 
 
-
-    public  void Succ (){
-        Right_wheel.setPower(.8); Left_wheel.setPower(.8);
-        goForward(2,62.0);
+    public void Pause (int time) {
+        LeftF.setPower(0);
+        LeftB.setPower(0);
+        RightF.setPower(0);
+        RightB.setPower(0);
+        sleep(time);
     }
-
-    public void simpLeftStrafe (){
-        LeftF.setPower(-.4);
-        LeftB.setPower(.4);
-        RightF.setPower(.4);
-        RightB.setPower(-.4);
-    }
-    public void simpRightStrafe (){
-        LeftF.setPower(.4);
-        LeftB.setPower(-.4);
-        RightF.setPower(-.4);
-        RightB.setPower(.4);
-    }
-
-    public void StrafeLeft ( double inches, double timeoutS)
+    public void StrafeLeft ( double inches, double timeOuts)
     {
-        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeoutS);
+        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeOuts);
     }
-    public void StrafeRight ( double inches, double timeoutS)
+    public void StrafeRight ( double inches, double timeOuts)
     {
-        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeoutS);
+        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeOuts);
     }
-    public void turnRight ( double inches,double timeoutS)
+    public void turnRight ( double inches,double timeOuts)
     {
-        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeoutS);
+        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeOuts);
     }
-    public void turnLeft ( double inches, double timeoutS)
+    public void turnLeft ( double inches, double timeOuts)
     {
-        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeoutS);
+        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeOuts);
     }
-    public void goBackward ( double inches, double timeoutS)
+    public void goBackward ( double inches, double timeOuts)
     {
-        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeoutS);
+        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeOuts);
     }
-    public void goForward(double inches, double timeoutS)
+    public void goForward(double inches, double timeOuts)
     {
-        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeoutS);
+        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeOuts);
     }
 
 }

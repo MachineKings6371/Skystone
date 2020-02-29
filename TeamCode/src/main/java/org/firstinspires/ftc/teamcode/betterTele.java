@@ -90,26 +90,26 @@ public class betterTele extends OpMode {
 
         //open clamp
         if (gamepad2.y){
-            Clamp.setPosition(.35);//951 923 5464s
+            Clamp.setPosition(.15);//951 923 5464s
         }
         //close clamp
         if (gamepad2.x){
-            Clamp.setPosition(.12);
+            Clamp.setPosition(.37);
         }
 
         //Rotates dah Arm
         if (Math.abs(gamepad2.left_trigger) > .1) {
-            ArmRotate.setPower(gamepad2.left_trigger/2.5);
+            ArmRotate.setPower(gamepad2.left_trigger/2);
         } else if (Math.abs(gamepad2.right_trigger) > .1) {
-            ArmRotate.setPower(-gamepad2.right_trigger/2.5);
+            ArmRotate.setPower(-gamepad2.right_trigger/2);
         } else{
             ArmRotate.setPower(0);}
 
         //Clamp lift
         if (Math.abs(gamepad2.left_stick_y) > .1){
-            ClampLift.setPower(-gamepad2.left_stick_y/2);
+            ClampLift.setPower(-gamepad2.left_stick_y/1.5);
         }else if (Math.abs(gamepad2.left_stick_y) < .1){
-            ClampLift.setPower(gamepad2.left_stick_y/2);
+            ClampLift.setPower(gamepad2.left_stick_y/1.5);
         }else {
             ClampLift.setPower(0);
         }
