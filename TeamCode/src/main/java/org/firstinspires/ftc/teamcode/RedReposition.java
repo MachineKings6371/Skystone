@@ -98,8 +98,9 @@ public class RedReposition extends LinearOpMode {
         LeftPull.setPosition(0);
         sleep(800);
         goForward(8,2.0);
-        StrafeRight(12,1.0);
-        goBackward(45,5.0);
+        StrafeRight(13,1.0);
+        goBackward(75,5.0);
+        turnLeft(45,5);
 
 //        encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
 //        StrafeLeft(.4,600);
