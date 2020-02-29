@@ -74,10 +74,10 @@ public class SensorMRColor extends LinearOpMode {
 
     // bPrevState and bCurrState represent the previous and current state of the button.
     boolean bPrevState = false;
-    boolean bCurrState = false;
+    boolean bCurrState = true;
 
     // bLedOn represents the state of the LED.
-    boolean bLedOn = true;
+    boolean bLedOn = bCurrState;
 
     // get a reference to our ColorSensor object.
     colorSensor = hardwareMap.get(ColorSensor.class, "sensor_color");
@@ -93,6 +93,7 @@ public class SensorMRColor extends LinearOpMode {
     colorSensor.argb();
     // while the op mode is active, loop and read the RGB data.
     // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
+
     while (opModeIsActive()) {
 
       // check the status of the x button on either game pad.

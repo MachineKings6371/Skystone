@@ -117,7 +117,7 @@ public class BlueReposition extends LinearOpMode {
         LeftPull.setPosition(.80);
         sleep(1000);
         goBackward(25,3.0);
-
+        turnLeft(40,4.0);
         Pause(250);
         RightPull.setPosition(1);
         LeftPull.setPosition(0);

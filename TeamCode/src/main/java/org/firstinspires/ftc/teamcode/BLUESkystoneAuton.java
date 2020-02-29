@@ -123,35 +123,41 @@ public class BLUESkystoneAuton extends LinearOpMode {
 
         waitForStart();
 
-        RightPull.setPosition(.60);
-        sleep(800);
-        goForward(29,2.0);
-        StrafeRight(23,2.0);
-        if (ColorSensor1.blue() > 100){
-            //autonomous 1
-            autonomous = "1";
-        }
-        StrafeRight(6,2.0);
-        if (ColorSensor1.blue() > 100){
-            //autonomous 2
-            autonomous = "2";
-        } else {
-            autonomous = "3";
-        }
-        StrafeRight(6, 2.0);
-
-        if (autonomous == "1") {
-
-        } else if (autonomous == "2") {
-
-        } else if (autonomous == "3") {
-
-        }
-        // autonomous 3
 
 
 
 
+
+
+
+
+
+
+//        RightPull.setPosition(.60);
+//        sleep(800);
+//        goForward(29,2.0);
+//        StrafeRight(23,2.0);
+//        if (ColorSensor1.blue() > 50){
+//            //autonomous 1
+//            autonomous = "1";
+//        }
+//        StrafeRight(6,2.0);
+//        if (ColorSensor1.blue() > 100){
+//            //autonomous 2
+//            autonomous = "2";
+//        } else {
+//            autonomous = "3";
+//        }
+//        StrafeRight(6, 2.0);
+//
+//        if (autonomous == "1") {
+//
+//        } else if (autonomous == "2") {
+//
+//        } else if (autonomous == "3") {
+//
+//        }
+//        // autonomous 3
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
