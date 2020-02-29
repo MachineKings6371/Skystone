@@ -39,7 +39,7 @@ public class Red2Block_Auto extends LinearOpMode {
     static final double DRIVE_SPEED = 0.4;
     static final double TURN_SPEED = 0.5;
 
-    Orientation angles;
+
 
     @Override
     public void runOpMode() {
@@ -85,9 +85,11 @@ public class Red2Block_Auto extends LinearOpMode {
     }
 
     public  void Succ (){
-        Right_wheel.setPower(.8);
-        Left_wheel.setPower(.8);
-        goForward(7,2.0);
+        Right_wheel.setPower(-1);
+        Left_wheel.setPower(-1);
+        encoderMovement(.3,-14,-14,-14,-14,4.0);
+
+
     }
 
 

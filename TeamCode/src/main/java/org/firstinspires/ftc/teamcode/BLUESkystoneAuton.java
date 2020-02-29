@@ -96,8 +96,8 @@ public class BLUESkystoneAuton extends LinearOpMode {
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
-        LeftPull.setPosition(0);
-        RightPull.setPosition(.30);
+//        LeftPull.setPosition(0);
+//        RightPull.setPosition(.30);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -115,39 +115,19 @@ public class BLUESkystoneAuton extends LinearOpMode {
 
         waitForStart();
 
-         simpLeftStrafe();
-         if (ColorSensor1.red() >= 200 & ColorSensor1.green() >= 165 & ColorSensor1.alpha() >= .75 ){
-             stop();
-         }
+        while ((ColorSensor1.red() & ColorSensor1.blue()) >= 20){
+            simpLeftStrafe();
+        }
+        StrafeRight(3, 1.0);
+        Succ();
 
 
 
 
 
-//        RightPull.setPosition(.60);
-//        sleep(800);
-//        StrafeRight(23,2.0);
-//        if (ColorSensor1.blue() > 50){
-//            //autonomous 1
-//            autonomous = "1";
-//        }
-//        StrafeRight(6,2.0);
-//        if (ColorSensor1.blue() > 100){
-//            //autonomous 2
-//            autonomous = "2";
-//        } else {
-//            autonomous = "3";
-//        }
-//        StrafeRight(6, 2.0);
-//
-//        if (autonomous == "1") {
-//
-//        } else if (autonomous == "2") {
-//
-//        } else if (autonomous == "3") {
-//
-//        }
-//        // autonomous 3
+
+
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -234,6 +214,7 @@ public class BLUESkystoneAuton extends LinearOpMode {
         LeftB.setPower(.4);
         RightF.setPower(.4);
         RightB.setPower(-.4);
+        sleep(7000);
     }
     public void simpRightStrafe (){
         LeftF.setPower(.4);
