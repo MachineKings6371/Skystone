@@ -46,9 +46,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import java.util.Locale;
 
-@Autonomous(name="(BLUE)Reposition")
+@Autonomous(name="(BLUE)Reposition(Bridge)")
 
-public class BlueReposition extends LinearOpMode {
+public class BlueRepo_Bridge extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -123,8 +123,8 @@ public class BlueReposition extends LinearOpMode {
         LeftPull.setPosition(0);
         sleep(800);
         goForward(12,2.0);
-        StrafeLeft(12,1.0);
-        goBackward(40,5.0);
+        StrafeRight(17,1.0);
+        goBackward(39,5.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
