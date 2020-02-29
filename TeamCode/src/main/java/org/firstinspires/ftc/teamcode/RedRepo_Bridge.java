@@ -29,8 +29,6 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -39,23 +37,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+@Autonomous(name="(RED)Reposition(Bridge)")
 
-import java.util.Locale;
-
-@Autonomous(name="(BLUE)Reposition")
-
-public class BlueReposition extends LinearOpMode {
+public class RedRepo_Bridge extends LinearOpMode {
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
     public DcMotor RightB;
     public Servo LeftPull;
     public Servo RightPull;
-    //public BNO055IMU IMU;
 
     /* Declare OpMode members. */
     private ElapsedTime runtime = new ElapsedTime();
@@ -66,22 +56,8 @@ public class BlueReposition extends LinearOpMode {
     static final double DRIVE_SPEED = 0.4;
     static final double TURN_SPEED = 0.5;
 
-    Orientation angles;
-
     @Override
     public void runOpMode() {
-
-//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-//        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-//        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-//        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-//        parameters.loggingEnabled      = true;
-//        parameters.loggingTag          = "IMU";
-//        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-//
-//        IMU.initialize(parameters);
-//        IMU = hardwareMap.get(BNO055IMU.class, "imu");
-
         LeftF = hardwareMap.dcMotor.get("LeftF");
         RightF = hardwareMap.dcMotor.get("RightF");
         LeftB = hardwareMap.dcMotor.get("LeftB");
@@ -89,12 +65,11 @@ public class BlueReposition extends LinearOpMode {
         LeftPull = hardwareMap.servo.get("LeftPull");
         RightPull = hardwareMap.servo.get("RightPull");
 
-
         LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
         LeftPull.setPosition(0);
-        RightPull.setPosition(.90);
+        RightPull.setPosition(.80);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -111,33 +86,43 @@ public class BlueReposition extends LinearOpMode {
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
+
         goForward(30,3.0);
-        StrafeLeft(14,3.0);
-        RightPull.setPosition(.20);
-        LeftPull.setPosition(.80);
-        sleep(1000);
-        goBackward(25,3.0);
-        turnLeft(45,4.0);
-        Pause(250);
+        StrafeRight(12,3.0);
+        RightPull.setPosition(.30);
+        LeftPull.setPosition(.70);
+        sleep(800);
+        goBackward(28,3.0);
+        turnRight(48,4.0);
         RightPull.setPosition(1);
         LeftPull.setPosition(0);
         sleep(800);
-        goForward(12,2.0);
-        StrafeLeft(12,1.0);
+        goForward(14,2.0);
+        StrafeLeft(20,1.0);
         goBackward(40,5.0);
+
+//        encoderDrive(DRIVE_SPEED, -30, -30, 3.0);
+//        StrafeLeft(.4,600);
+//        Pause(250);
+//        RightPull.setPosition(.30);
+//        LeftPull.setPosition(.70);
+//        sleep(800);
+//        Pause(250);
+//        encoderDrive(DRIVE_SPEED,38,38,3.0);
+//        encoderTurnLeft(TURN_SPEED, 60,60,5.0);
+//        Pause(250);
+//        RightPull.setPosition(1);
+//        LeftPull.setPosition(0);
+//        sleep(800);
+//        Pause(250);
+//        StrafeLeft(.4,900);
+//        Pause(250);
+//        goBackward(.4,1100);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
 
-
-    public void Pause (int time) {
-        LeftF.setPower(0);
-        LeftB.setPower(0);
-        RightF.setPower(0);
-        RightB.setPower(0);
-        sleep(time);
-    }
 
     public void encoderMovement(double speed,
                                 double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
@@ -198,43 +183,38 @@ public class BlueReposition extends LinearOpMode {
 
         }
     }
-    public void simpLeftTurn (){
-        LeftF.setPower(.4);
-        LeftB.setPower(.4);
-        RightF.setPower(-.4);
-        RightB.setPower(-.4);
-    }
-    public void simpRightTurn (){
-        LeftF.setPower(-.4);
-        LeftB.setPower(-.4);
-        RightF.setPower(.4);
-        RightB.setPower(.4);
-    }
 
-    public void StrafeLeft ( double inches, double timeoutS)
-    {
-        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeoutS);
-    }
-    public void StrafeRight ( double inches, double timeoutS)
-    {
-        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeoutS);
-    }
-    public void turnRight ( double inches,double timeoutS)
-    {
-        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeoutS);
-    }
-    public void turnLeft ( double inches, double timeoutS)
-    {
-        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeoutS);
-    }
-    public void goBackward ( double inches, double timeoutS)
-    {
-        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeoutS);
-    }
-    public void goForward(double inches, double timeoutS)
-    {
-        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeoutS);
-    }
 
+    public void Pause (int time) {
+        LeftF.setPower(0);
+        LeftB.setPower(0);
+        RightF.setPower(0);
+        RightB.setPower(0);
+        sleep(time);
+    }
+    public void StrafeLeft ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeOuts);
+    }
+    public void StrafeRight ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeOuts);
+    }
+    public void turnRight ( double inches,double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeOuts);
+    }
+    public void turnLeft ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeOuts);
+    }
+    public void goBackward ( double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeOuts);
+    }
+    public void goForward(double inches, double timeOuts)
+    {
+        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeOuts);
+    }
 
 }
