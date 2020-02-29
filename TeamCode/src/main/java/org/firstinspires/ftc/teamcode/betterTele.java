@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.internal.tfod.Timer;
 
-@Disabled
+
 @TeleOp (name = "betterTele")//current mother
 public class betterTele extends OpMode {
     RobotContainer robot = new RobotContainer();
