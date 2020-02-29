@@ -34,6 +34,7 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -78,16 +79,6 @@ public class BLUESkystoneAuton extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-//        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-//        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-//        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-//        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-//        parameters.loggingEnabled      = true;
-//        parameters.loggingTag          = "IMU";
-//        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-//
-//        IMU.initialize(parameters);
-
 
         LeftF = hardwareMap.dcMotor.get("LeftF");
         RightF = hardwareMap.dcMotor.get("RightF");
@@ -105,7 +96,7 @@ public class BLUESkystoneAuton extends LinearOpMode {
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
 
         LeftPull.setPosition(0);
-        RightPull.setPosition(.90);
+        RightPull.setPosition(.30);
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
@@ -123,18 +114,17 @@ public class BLUESkystoneAuton extends LinearOpMode {
 
         waitForStart();
 
-        while (opModeIsActive()){
+         simpLeftStrafe();
+         if (ColorSensor1.red() >= 200 & ColorSensor1.green() >= 165 & ColorSensor1.alpha() >= .75 ){
+             stop();
+         }
 
-            while ((ColorSensor1.red() & ColorSensor1.blue()) >= 20){
-                simpLeftStrafe();
-            } stop();
-        }
+
 
 
 
 //        RightPull.setPosition(.60);
 //        sleep(800);
-//        goForward(29,2.0);
 //        StrafeRight(23,2.0);
 //        if (ColorSensor1.blue() > 50){
 //            //autonomous 1
