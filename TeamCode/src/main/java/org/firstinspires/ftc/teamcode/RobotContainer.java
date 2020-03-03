@@ -33,6 +33,8 @@ public class RobotContainer {
         ClampLift = hwMap.dcMotor.get("ClampLift");
         Clamp = hwMap.servo.get("Clamp");
 
+
+
         //Servos
         LeftPull = hwMap.servo.get("LeftPull");
         RightPull = hwMap.servo.get("RightPull");
