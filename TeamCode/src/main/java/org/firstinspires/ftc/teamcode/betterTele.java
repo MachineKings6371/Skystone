@@ -56,11 +56,11 @@ public class betterTele extends OpMode {
 
 
         //open clamp
-        if (gamepad2.y) {
+        if (gamepad2.x) {
             robot.setClamp(.15);//951 923 5464s
         }
         //close clamp
-        if (gamepad2.x) {
+        if (gamepad2.y) {
             robot.setClamp(.37);
         }
 

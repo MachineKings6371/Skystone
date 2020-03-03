@@ -41,8 +41,8 @@ public class RobotContainer {
 
     //Basic Movement
     public void setLeftSide(double power) {
-        LeftF.setPower(power);
-        LeftB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(-power);
     }
     public void setRightSide(double power) {
         RightF.setPower(power);
@@ -79,6 +79,7 @@ public class RobotContainer {
     public void setLeftPull(double power) {
         LeftPull.setPosition(power);
     }
+
     public void encoderMovement(double speed,
                                 double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
                                 double timeoutS) {
