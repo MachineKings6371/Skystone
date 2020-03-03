@@ -33,6 +33,8 @@ public class RobotContainer {
         ClampLift = hwMap.dcMotor.get("ClampLift");
         Clamp = hwMap.servo.get("Clamp");
 
+
+
         //Servos
         LeftPull = hwMap.servo.get("LeftPull");
         RightPull = hwMap.servo.get("RightPull");
@@ -41,8 +43,8 @@ public class RobotContainer {
 
     //Basic Movement
     public void setLeftSide(double power) {
-        LeftF.setPower(power);
-        LeftB.setPower(power);
+        LeftF.setPower(-power);
+        LeftB.setPower(-power);
     }
     public void setRightSide(double power) {
         RightF.setPower(power);

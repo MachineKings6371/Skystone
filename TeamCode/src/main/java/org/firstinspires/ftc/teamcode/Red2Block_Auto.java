@@ -17,9 +17,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import java.util.Locale;
 
-@Autonomous(name="(Red)2BlockAuto")
+@Autonomous(name="BlockAutoTest")
 
 public class Red2Block_Auto extends LinearOpMode {
+    RobotContainer robot = new RobotContainer();
     public DcMotor LeftF;
     public DcMotor RightF;
     public DcMotor LeftB;
@@ -40,9 +41,9 @@ public class Red2Block_Auto extends LinearOpMode {
     static final double TURN_SPEED = 0.5;
 
 
-
     @Override
     public void runOpMode() {
+
 
         LeftF = hardwareMap.dcMotor.get("LeftF");
         RightF = hardwareMap.dcMotor.get("RightF");
@@ -79,6 +80,8 @@ public class Red2Block_Auto extends LinearOpMode {
         waitForStart();
 
         Succ();
+        goBackward(15,2.0);
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -87,10 +90,10 @@ public class Red2Block_Auto extends LinearOpMode {
     public  void Succ (){
         Right_wheel.setPower(-1);
         Left_wheel.setPower(-1);
-        encoderMovement(.3,-14,-14,-14,-14,4.0);
+        encoderMovement(.2,-15,-15,-15,-15,4.0);
+        robot.Clamp.setPosition(.15);
 
-
-    }
+}
 
 
     public void Pause (int time) {
