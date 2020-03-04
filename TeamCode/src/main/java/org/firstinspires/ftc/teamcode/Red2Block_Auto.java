@@ -79,10 +79,13 @@ public class Red2Block_Auto extends LinearOpMode {
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-
+        Clamp.setPosition(.35);
+        sleep(800);
         Succ();
+        Clamp.setPosition(.15);
+        sleep(800);
         goBackward(15,2.0);
-
+        turnRight(21, 2.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -91,11 +94,7 @@ public class Red2Block_Auto extends LinearOpMode {
     public  void Succ (){
         Right_wheel.setPower(-1);
         Left_wheel.setPower(-1);
-        encoderMovement(.2,-15,-15,-15,-15,4.0);
-        sleep(1000);
-        robot.Clamp.setPosition(.15);
-        sleep(800);
-
+        encoderMovement(.2,-15,-15,-15,-15,2.0);
 }
 
     public void Pause (int time) {
