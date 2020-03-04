@@ -70,9 +70,6 @@ public class RobotContainer {
     public void setClampLift(double power) {
         ClampLift.setPower(power);
     }
-
-    //Pulls
-
     public void encoderMovement(double speed,
                                 double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
                                 double timeoutS) {

@@ -56,11 +56,12 @@ public class betterTele extends OpMode {
 
 
         //open clamp
-        if (gamepad2.x) {
+        if (gamepad2.y) {
             robot.Clamp.setPosition(.15);//951 923 5464s
         }
         //close clamp
-        if (gamepad2.y) {
+        if (gamepad2.x) {
+
             robot.Clamp.setPosition(.37);
         }
 
@@ -86,14 +87,15 @@ public class betterTele extends OpMode {
 
         //Pull Stuff
         if (gamepad1.right_bumper) {          //Ready to throw down w/ hands down
+
             robot.RightPull.setPosition(.30);
             robot.LeftPull.setPosition(.70);
         }
         if (gamepad1.left_bumper) {           //Puts the hands up
             robot.RightPull.setPosition(1);      //we messed up the directions, right is left and vise versa
-            robot.LeftPull.setPosition(.10);
-        }
 
+            robot.LeftPull.setPosition(.30);
+        }
     }
 }
 

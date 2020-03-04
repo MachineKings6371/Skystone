@@ -205,7 +205,8 @@ public class BLUESkystoneAuton extends LinearOpMode {
 
 
     public  void Succ (){
-        Right_wheel.setPower(.8); Left_wheel.setPower(.8);
+        Right_wheel.setPower(.8);
+        Left_wheel.setPower(.8);
         goForward(2,62.0);
     }
 
