@@ -25,6 +25,7 @@ public class Red2Block_Auto extends LinearOpMode {
     public DcMotor RightF;
     public DcMotor LeftB;
     public DcMotor RightB;
+    public Servo Clamp;
     public Servo LeftPull;
     public Servo RightPull;
     public DcMotor Left_wheel;
@@ -55,7 +56,7 @@ public class Red2Block_Auto extends LinearOpMode {
         Left_wheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         Right_wheel = hardwareMap.dcMotor.get("Right_wheel");
         Right_wheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
+        Clamp = hardwareMap.servo.get("Clamp");
 
         LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
         LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -91,7 +92,9 @@ public class Red2Block_Auto extends LinearOpMode {
         Right_wheel.setPower(-1);
         Left_wheel.setPower(-1);
         encoderMovement(.2,-15,-15,-15,-15,4.0);
+        sleep(1000);
         robot.Clamp.setPosition(.15);
+        sleep(800);
 
 }
 
