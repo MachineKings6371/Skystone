@@ -64,9 +64,6 @@ public class RobotContainer {
     }
 
     //Arm rotation & clamping
-    public void setClamp(double power) {
-        Clamp.setPosition(power);
-    }
     public void setArmTurn(double power) {
         ArmRotate.setPower(power);
     }
@@ -75,12 +72,7 @@ public class RobotContainer {
     }
 
     //Pulls
-    public void setRightPull(double power) {
-        RightPull.setPosition(power);
-    }
-    public void setLeftPull(double power) {
-        LeftPull.setPosition(power);
-    }
+
     public void encoderMovement(double speed,
                                 double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
                                 double timeoutS) {
