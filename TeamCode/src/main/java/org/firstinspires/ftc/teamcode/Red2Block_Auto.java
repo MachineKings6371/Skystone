@@ -95,7 +95,6 @@ public class Red2Block_Auto extends LinearOpMode {
 
 }
 
-
     public void Pause (int time) {
         LeftF.setPower(0);
         LeftB.setPower(0);
