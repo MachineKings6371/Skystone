@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name="parkingLeftBridge")
+@Autonomous(name="Parking(LeftBridge)")
 
 public class LeftBridgePark extends LinearOpMode {
     public DcMotor LeftF;
@@ -158,40 +158,6 @@ public class LeftBridgePark extends LinearOpMode {
     public void goForward(double inches, double timeOuts)
     {
         encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeOuts);
-    }
-
-    public void StrafeLeft ( double power, int time)
-    {
-        RightF.setPower(-power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(-power);
-        sleep(time);
-    }
-    public void StrafeRight ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(-power);
-        LeftF.setPower(-power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-    public void turnLeft ( double power, int time)
-    {
-        RightF.setPower(-power);
-        RightB.setPower(-power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-    public void goBackward ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
-
     }
 
 }

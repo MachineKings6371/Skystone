@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "parkingRightBridge")
+@Autonomous(name = "Parking(RightBridge)")
 
 public class RightBridgePark extends LinearOpMode {
     public DcMotor LeftF;
@@ -58,8 +58,6 @@ public class RightBridgePark extends LinearOpMode {
 
         waitForStart();
 
-        goForward(22,2.0);
-        StrafeRight(30,3.0);
 
 
         telemetry.addData("Path", "Complete");
@@ -127,69 +125,36 @@ public class RightBridgePark extends LinearOpMode {
     }
 
 
-    public void Pause (int time) {
+    public void Pause(int time) {
         LeftF.setPower(0);
         LeftB.setPower(0);
         RightF.setPower(0);
         RightB.setPower(0);
         sleep(time);
     }
-    public void StrafeLeft ( double inches, double timeOuts)
-    {
+
+    public void StrafeLeft(double inches, double timeOuts) {
         encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeOuts);
     }
-    public void StrafeRight ( double inches, double timeOuts)
-    {
+
+    public void StrafeRight(double inches, double timeOuts) {
         encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeOuts);
     }
-    public void turnRight ( double inches,double timeOuts)
-    {
+
+    public void turnRight(double inches, double timeOuts) {
         encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeOuts);
     }
-    public void turnLeft ( double inches, double timeOuts)
-    {
+
+    public void turnLeft(double inches, double timeOuts) {
         encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeOuts);
     }
-    public void goBackward ( double inches, double timeOuts)
-    {
+
+    public void goBackward(double inches, double timeOuts) {
         encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeOuts);
     }
-    public void goForward(double inches, double timeOuts)
-    {
-        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeOuts);
-    }
-    public void StrafeLeft ( double power, int time)
-    {
-        RightF.setPower(-power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(-power);
-        sleep(time);
-    }
-    public void StrafeRight ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(-power);
-        LeftF.setPower(-power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-    public void turnLeft ( double power, int time)
-    {
-        RightF.setPower(-power);
-        RightB.setPower(-power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
-    }
-    public void goBackward ( double power, int time)
-    {
-        RightF.setPower(power);
-        RightB.setPower(power);
-        LeftF.setPower(power);
-        LeftB.setPower(power);
-        sleep(time);
 
+    public void goForward(double inches, double timeOuts) {
+        encoderMovement(DRIVE_SPEED, -inches, -inches, -inches, -inches, timeOuts);
     }
 
 }
