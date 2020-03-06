@@ -58,7 +58,9 @@ public class RightBridgePark extends LinearOpMode {
 
         waitForStart();
 
-
+        goForward(25,2);
+        turnRight(20,2);
+        goForward(35,4);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
