@@ -80,7 +80,7 @@ public class Red2Block_Auto extends LinearOpMode {
 
         waitForStart();
         Clamp.setPosition(.35);
-        sleep(800);
+        sleep(500);
         goForward(30,2.0); //align succ wheel with first block
         Succ();
         Clamp.setPosition(.15);
@@ -116,6 +116,11 @@ public class Red2Block_Auto extends LinearOpMode {
         Left_wheel.setPower(-1);
         encoderMovement(.2,-15,-15,-15,-15,2.0);
 }
+    public  void Succ2 (){
+        Right_wheel.setPower(-1);
+        Left_wheel.setPower(-1);
+        encoderMovement(.2,-10,-10,-10,-10,1.0);
+    }
     public void spit () {
         Right_wheel.setPower(1);
         Left_wheel.setPower(1);
