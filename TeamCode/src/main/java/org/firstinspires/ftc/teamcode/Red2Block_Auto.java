@@ -88,10 +88,24 @@ public class Red2Block_Auto extends LinearOpMode {
         goBackward(38,2.0);
         stopIntake();
         turnRight(20, 2.0);
-        goForward(36,3.0);
-        Clamp.setPosition(.35);
+        goForward(45,3.0);
+        Clamp.setPosition(.40);
+        sleep(800);
         spit();
         stopIntake();
+        goBackward(35,2.0);
+        turnLeft(20,1.0);
+        goForward(25,2.0);
+        Succ();
+        Clamp.setPosition(.15);
+        sleep(800);
+        goBackward(38,2.0);
+        stopIntake();
+        turnRight(20,2.0);
+        goForward(55,3.0);
+        spit();
+        stopIntake();
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -105,7 +119,7 @@ public class Red2Block_Auto extends LinearOpMode {
     public void spit () {
         Right_wheel.setPower(1);
         Left_wheel.setPower(1);
-        encoderMovement(.2,15,15,15,15,2.0);
+        encoderMovement(.4,15,15,15,15,2.0);
     }
 
     public  void stopIntake(  ) {
