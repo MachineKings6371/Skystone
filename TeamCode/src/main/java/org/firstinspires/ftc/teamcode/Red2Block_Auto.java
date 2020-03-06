@@ -51,7 +51,6 @@ public class Red2Block_Auto extends LinearOpMode {
         LeftB = hardwareMap.dcMotor.get("LeftB");
         RightB = hardwareMap.dcMotor.get("RightB");
         LeftPull = hardwareMap.servo.get("LeftPull");
-        Clamp.setPosition(.35);
         RightPull = hardwareMap.servo.get("RightPull");
         Left_wheel = hardwareMap.dcMotor.get("Left_wheel");
         Left_wheel.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -80,15 +79,17 @@ public class Red2Block_Auto extends LinearOpMode {
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-
+        Clamp.setPosition(.35);
+        sleep(800);
         goForward(30,2.0); //align succ wheel with first block
         Succ();
         Clamp.setPosition(.15);
         sleep(800);
-        goBackward(20,2.0);
+        goBackward(38,2.0);
         stopIntake();
         turnRight(20, 2.0);
         goForward(36,3.0);
+        Clamp.setPosition(.35);
         spit();
         stopIntake();
 
