@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -25,9 +26,13 @@ public class parkingleftwall extends LinearOpMode {
         LeftPull = hardwareMap.servo.get("RightPull");
         RightPull = hardwareMap.servo.get("LeftPull");
 
+        LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
+        LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
+
         waitForStart();
-        goForward(1,2);
-        StrafeLeft(10,3);
+        goForward(2,2);
+        turnLeft(20,2);
+        goForward(34, 4);
     }
     private ElapsedTime runtime = new ElapsedTime();
 

@@ -60,7 +60,8 @@ public class LeftBridgePark extends LinearOpMode {
         waitForStart();
 
         goForward(25,2.0);
-        StrafeLeft(40,3.0);
+        turnLeft(20,2);
+        goForward(35, 4);
 
 
         telemetry.addData("Path", "Complete");

@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -28,10 +29,17 @@ public class parkingrightwall extends LinearOpMode {
         LeftPull = hardwareMap.servo.get("RightPull");
         RightPull = hardwareMap.servo.get("LeftPull");
 
+        LeftB.setDirection(DcMotorSimple.Direction.REVERSE);
+        LeftF.setDirection(DcMotorSimple.Direction.REVERSE);
         waitForStart();
+
+        goForward(2, 2);
+        turnRight(20,2);
+        goForward(34 ,2);
 
 
     }
+
     private ElapsedTime runtime = new ElapsedTime();
 
     static final double COUNTS_PER_MOTOR_REV = 537.6;
@@ -39,6 +47,7 @@ public class parkingrightwall extends LinearOpMode {
     static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV) / (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double DRIVE_SPEED = 0.4;
     static final double TURN_SPEED = 0.5;
+
     public void encoderMovement(double speed,
                                 double FrontLeftInches, double FrontRightInches, double BackLeftInches, double BackRightInches,
                                 double timeoutS) {
@@ -99,7 +108,6 @@ public class parkingrightwall extends LinearOpMode {
         }
     }
 
-
     public void Pause(int time) {
         LeftF.setPower(0);
         LeftB.setPower(0);
@@ -107,31 +115,13 @@ public class parkingrightwall extends LinearOpMode {
         RightB.setPower(0);
         sleep(time);
     }
-
-    public void StrafeLeft(double inches, double timeOuts) {
-        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeOuts);
+    public void goForward(double inches, double timeoutS)
+    {
+        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeoutS);
     }
-
-    public void StrafeRight(double inches, double timeOuts) {
-        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeOuts);
+    public void turnRight ( double inches,double timeoutS)
+    {
+        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeoutS);
     }
-
-    public void turnRight(double inches, double timeOuts) {
-        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeOuts);
-    }
-
-    public void turnLeft(double inches, double timeOuts) {
-        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeOuts);
-    }
-
-    public void goBackward(double inches, double timeOuts) {
-        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeOuts);
-    }
-
-    public void goForward(double inches, double timeOuts) {
-        encoderMovement(DRIVE_SPEED, -inches, -inches, -inches, -inches, timeOuts);
-    }
-
-}
 
 }
