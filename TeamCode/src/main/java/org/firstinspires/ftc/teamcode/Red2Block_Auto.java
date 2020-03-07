@@ -122,7 +122,13 @@ public class Red2Block_Auto extends LinearOpMode {
         Left_wheel.setPower(-1);
         encoderMovement(.2,-15,-15,-15,-15,2.0);
 }
-    public void spitt () {
+    public  void Succ2 (){
+        Right_wheel.setPower(-1);
+        Left_wheel.setPower(-1);
+        encoderMovement(.2,-10,-10,-10,-10,1.0);
+    }
+    public void spit () {
+
         Right_wheel.setPower(1);
         Left_wheel.setPower(1);
         encoderMovement(.4,15,15,15,15,2.0);
