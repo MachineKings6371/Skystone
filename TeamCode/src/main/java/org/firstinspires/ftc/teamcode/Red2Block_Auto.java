@@ -79,32 +79,38 @@ public class Red2Block_Auto extends LinearOpMode {
         RightB.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
+
         Clamp.setPosition(.35);
-        sleep(800);
+        sleep(500);
         goForward(30,2.0); //align succ wheel with first block
         Succ();
         Clamp.setPosition(.15);
-        sleep(800);
+        sleep(500);
         goBackward(38,2.0);
         stopIntake();
         turnRight(20, 2.0);
         goForward(45,3.0);
         Clamp.setPosition(.40);
-        sleep(800);
-        spit();
+        sleep(500);
+        spitt();
         stopIntake();
-        goBackward(35,2.0);
-        turnLeft(20,1.0);
-        goForward(25,2.0);
+
+        goBackward(25,2.0);
+        turnLeft(40,3.0);
+        StrafeRight(38,3.0);
         Succ();
         Clamp.setPosition(.15);
-        sleep(800);
-        goBackward(38,2.0);
+        sleep(500);
         stopIntake();
-        turnRight(20,2.0);
-        goForward(55,3.0);
-        spit();
+        StrafeLeft(35,3.0);
+        turnRight(40,3.0);
+        StrafeRight(7,2.0);
+        goForward(54,2.0);
+        Clamp.setPosition(.40);
+        sleep(500);
+        spitt();
         stopIntake();
+        goBackward(3,1.0);
 
 
         telemetry.addData("Path", "Complete");
@@ -116,7 +122,7 @@ public class Red2Block_Auto extends LinearOpMode {
         Left_wheel.setPower(-1);
         encoderMovement(.2,-15,-15,-15,-15,2.0);
 }
-    public void spit () {
+    public void spitt () {
         Right_wheel.setPower(1);
         Left_wheel.setPower(1);
         encoderMovement(.4,15,15,15,15,2.0);
@@ -209,27 +215,27 @@ public class Red2Block_Auto extends LinearOpMode {
 
     public void StrafeLeft ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, inches, -inches, -inches, inches, timeoutS);
+        encoderMovement(.5, inches, -inches, -inches, inches, timeoutS);
     }
     public void StrafeRight ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, -inches, inches, inches, -inches, timeoutS);
+        encoderMovement(.5, -inches, inches, inches, -inches, timeoutS);
     }
     public void turnRight ( double inches,double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, -inches, inches, -inches, inches, timeoutS);
+        encoderMovement(.5, -inches, inches, -inches, inches, timeoutS);
     }
     public void turnLeft ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, inches, -inches, inches, -inches, timeoutS);
+        encoderMovement(.5, inches, -inches, inches, -inches, timeoutS);
     }
     public void goBackward ( double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED, inches, inches, inches, inches, timeoutS);
+        encoderMovement(.5, inches, inches, inches, inches, timeoutS);
     }
     public void goForward(double inches, double timeoutS)
     {
-        encoderMovement(DRIVE_SPEED,-inches,-inches,-inches,-inches,timeoutS);
+        encoderMovement(.5,-inches,-inches,-inches,-inches,timeoutS);
     }
 
 
