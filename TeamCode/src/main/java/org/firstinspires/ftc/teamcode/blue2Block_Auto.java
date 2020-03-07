@@ -17,9 +17,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import java.util.Locale;
 
-@Autonomous(name="2Block(RED)")
+@Autonomous(name="2Block(BLUE)")
 
-public class Red2Block_Auto extends LinearOpMode {
+public class blue2Block_Auto extends LinearOpMode {
     RobotContainer robot = new RobotContainer();
     public DcMotor LeftF;
     public DcMotor RightF;
@@ -80,37 +80,37 @@ public class Red2Block_Auto extends LinearOpMode {
 
         waitForStart();
 
+
         Clamp.setPosition(.35);
         sleep(500);
-        goForward(30,2.0); //align succ wheel with first block
+        goForward(29,2.0); //align succ wheel with first block
         Succ();
         Clamp.setPosition(.15);
         sleep(500);
         goBackward(38,2.0);
         stopIntake();
-        turnRight(19.5, 2.0);
+        turnLeft(20.7, 3.0);
         goForward(45,3.0);
         Clamp.setPosition(.40);
         sleep(500);
         spitt();
         stopIntake();
 
-        goBackwardsP2(44,2.0);
-        turnLeft(20.5,3.0);
+
+        goBackwardsP2(43,2.0);
+        turnRight(20.7,2.0);
         goForward(20,2.0);
         Succ();
         Clamp.setPosition(.15);
         sleep(500);
-        goBackward(34,2.0);
+        goBackward(44,2.0);
         stopIntake();
-        turnRight(20,2.0);
+        turnLeft(21,2.0);
         goForward(55,2.0);
         Clamp.setPosition(.40);
         sleep(500);
         spitt();
         stopIntake();
-        goBackward(55,2.0);
-        turnRight(20,2.0);
 
 //        goBackward(25,2.0);
 //        turnLeft(40,3.0);
@@ -138,11 +138,16 @@ public class Red2Block_Auto extends LinearOpMode {
         Right_wheel.setPower(-1);
         Left_wheel.setPower(-1);
         encoderMovement(.2,-15,-15,-15,-15,2.0);
-}
+    }
     public  void Succ2 (){
         Right_wheel.setPower(-1);
         Left_wheel.setPower(-1);
-        encoderMovement(.2,-10,-10,-10,-10,1.0);
+        encoderMovement(.2,-11,-11,-11,-11,2.0);
+    }
+    public  void Succ3 (){
+        Right_wheel.setPower(-1);
+        Left_wheel.setPower(-1);
+        encoderMovement(.2,-10,-10,-10,-10,2.0);
     }
     public void spitt () {
 
@@ -264,6 +269,4 @@ public class Red2Block_Auto extends LinearOpMode {
     {
         encoderMovement(.5,-inches,-inches,-inches,-inches,timeoutS);
     }
-
-
 }
